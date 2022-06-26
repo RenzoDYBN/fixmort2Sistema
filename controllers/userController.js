@@ -2,7 +2,6 @@
 const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 
-<<<<<<< HEAD
 //procedure to save
 /*
 exports.saveUser_renzo = async(req, res) => {
@@ -62,8 +61,6 @@ exports.saveUser_renzo = async(req, res) => {
 
 
 
-=======
->>>>>>> b48ffc4f683f872dd0c3d4e5fd99f00ba4f8f3f7
 //exports.searchuser = (req, res) => {
 exports.saveUser = (req, res) => {
     //var action = req.body.action;
@@ -193,4 +190,3 @@ exports.updateUser =  async(req, res) => {
         }
     })
 }
-
