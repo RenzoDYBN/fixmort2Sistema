@@ -22,7 +22,7 @@ router.get('/users', authController.isAuthenticated, (req, res) => {
             throw error;
         } else {
             // res.send(results);
-            if (row.codigo_rol=="1") { 
+            if (row.codigo_rol == 1) { 
                 res.render('users', { results: results, titleWeb: "List users" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
