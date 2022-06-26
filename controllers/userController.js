@@ -3,7 +3,7 @@ const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 
 //procedure to save
-
+/*
 exports.saveUser_renzo = async(req, res) => {
     const dni_persona = req.body.dni_persona
     const pass = req.body.pass
@@ -55,7 +55,7 @@ exports.saveUser_renzo = async(req, res) => {
         }); 
 });
 };
-
+*/
 
 
 
@@ -190,3 +190,4 @@ exports.updateUser =  async(req, res) => {
         }
     })
 }
+
