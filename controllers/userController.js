@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 
 //procedure to save
+
 exports.saveUser_renzo = async(req, res) => {
     const dni_persona = req.body.dni_persona
     const pass = req.body.pass
@@ -55,23 +56,9 @@ exports.saveUser_renzo = async(req, res) => {
 });
 };
 
-//procedure to update
-exports.updateUser =  async(req, res) => {
-    const usuario = req.body.usuario
-    const dni_persona = req.body.dni_persona
-    const pass = req.body.pass
-    const codigo_rol = req.body.codigo_rol
-    const estado_usuario = req.body.estado_usuario
 
-    let passHash = await bcryptjs.hash(pass, 10)
-    conexion.query('UPDATE usuarios SET ? WHERE usuario = ?', [{ dni_persona:dni_persona, pass:passHash, codigo_rol:codigo_rol, estado_usuario:estado_usuario}, usuario ], (error, results) => {
-        if(error) {
-            console.error(error)
-        } else {
-            res.redirect('/');
-        }
-    })
-}
+
+
 
 
 //exports.searchuser = (req, res) => {
@@ -96,10 +83,8 @@ exports.saveUser = (req, res) => {
             if (result.length == 0) {
                 console.log("El DNI NO existe en la tabla PERSONAS add termina");
                 //confirm.log(error);
-                return res.status(400).render("searchuser", {
-                    msg: "Ingresa Tu Usuario y Contraseña",
-                    msg_type: "error",
-                });
+                return res.render("createUser", { alert: true,
+                    alertMessage: 'El DNI NO existe en la tabla PERSONAS add termina' })
             }else{                  
                 console.log("El DNI existe en la tabla personas");
                 conexion.query("select * from usuarios where dni_persona=?", [dni_persona],
@@ -109,15 +94,18 @@ exports.saveUser = (req, res) => {
                    }
                    if (result.length == 0) {  
                        if (password == cpassword) {               
-                           let hashedPassword = await bcrypt.hash(password, 8);
+                           let hashedPassword = await bcryptjs.hash(password, 10);
                            console.log(hashedPassword);   
                            adduser(hashedPassword);   
                        }else{
                            console.log("Las contraseñas no coinciden");
-                           return res.render("searchuser", { msg: "Las contraseñas no coinciden", msg_type: "error" })
+                           return res.render("createUser", { alert: true,
+                            alertMessage: 'Las contraseñas no coinciden' })
                         }      
                    }else{
                       console.log("Ya existe usuario con ese DNI");
+                      return res.render("createUser", { alert: true,
+                        alertMessage: 'Ya existe usuario con ese DNI' })
                     }
                 })  
             }
@@ -163,12 +151,15 @@ exports.saveUser = (req, res) => {
              VALUES ("${dni_persona}", "${codigo_rol}", "${nombre_usuario}", "${hashedPassword}", "Activo")
              `;
              conexion.query(query, function(error, data) {
-                    // console.log(action);
-                    console.log("Usuario registrado");
-                    res.json({
-                        message: 'Data Added'
-
-                    });
+                    if(error) {
+                    console.error(error)
+                    res.render('register', {
+                        alert: true,
+                        alertMessage: 'Este usuario ya existe'
+                    })
+                    } else {   
+                    res.redirect('/')
+                 }
                 });
 
 
@@ -181,3 +172,21 @@ exports.saveUser = (req, res) => {
    // }
 
 };
+
+//UPADATE DE USUARIO
+exports.updateUser =  async(req, res) => {
+    const usuario = req.body.usuario
+    const dni_persona = req.body.dni_persona
+    const pass = req.body.pass
+    const codigo_rol = req.body.codigo_rol
+    const estado_usuario = req.body.estado_usuario
+
+    let passHash = await bcryptjs.hash(pass, 10)
+    conexion.query('UPDATE usuarios SET ? WHERE usuario = ?', [{ dni_persona:dni_persona, pass:passHash, codigo_rol:codigo_rol, estado_usuario:estado_usuario}, usuario ], (error, results) => {
+        if(error) {
+            console.error(error)
+        } else {
+            res.redirect('/');
+        }
+    })
+}
