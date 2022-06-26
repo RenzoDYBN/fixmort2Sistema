@@ -3,7 +3,7 @@ const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 
 //procedure to save
-exports.saveUser = async(req, res) => {
+exports.saveUser_renzo = async(req, res) => {
     const dni_persona = req.body.dni_persona
     const pass = req.body.pass
     const cpass = req.body.cpass
@@ -72,3 +72,112 @@ exports.updateUser =  async(req, res) => {
         }
     })
 }
+
+
+//exports.searchuser = (req, res) => {
+exports.saveUser = (req, res) => {
+    //var action = req.body.action;
+   // if (action == 'Add') {
+
+        var dni_persona = req.body.dni_persona;
+        var codigo_rol = req.body.codigo_rol;
+        var password = req.body.pass;
+        var cpassword = req.body.cpass;
+        //var flag = 1;
+
+        //console.log(action);
+        //CONSULTA SI EL DNI EXISTE EN LA TABLA PERSONAS
+        conexion.query("select * from personas where dni_persona=?", [dni_persona],
+        async(error, result) => {
+            if (error) {
+                confirm.log(error);
+            }
+            console.log("result length: "+ result.length);
+            if (result.length == 0) {
+                console.log("El DNI NO existe en la tabla PERSONAS add termina");
+                //confirm.log(error);
+                return res.status(400).render("searchuser", {
+                    msg: "Ingresa Tu Usuario y Contraseña",
+                    msg_type: "error",
+                });
+            }else{                  
+                console.log("El DNI existe en la tabla personas");
+                conexion.query("select * from usuarios where dni_persona=?", [dni_persona],
+                async(error, result) => {
+                   if (error) {
+                      confirm.log(error);
+                   }
+                   if (result.length == 0) {  
+                       if (password == cpassword) {               
+                           let hashedPassword = await bcrypt.hash(password, 8);
+                           console.log(hashedPassword);   
+                           adduser(hashedPassword);   
+                       }else{
+                           console.log("Las contraseñas no coinciden");
+                           return res.render("searchuser", { msg: "Las contraseñas no coinciden", msg_type: "error" })
+                        }      
+                   }else{
+                      console.log("Ya existe usuario con ese DNI");
+                    }
+                })  
+            }
+        });  
+    
+        function adduser(hashedPassword) {
+             //VALIDACION PARA LA CREACION DE EL USUARIO primera letra de primer nombre + primer apellido + primera letra de 2do apellido ( Jose Manuel Perez Ramirez, jperezr)
+             conexion.query('SELECT nombre_persona,apellido_paterno,apellido_materno FROM personas WHERE dni_persona = ?',
+        [dni_persona],(err, results) => {
+            if(!err){
+              
+              //res.json(rows);
+              data1 = JSON.stringify(results[0].nombre_persona); 
+              data2 = JSON.stringify(results[0].apellido_paterno); 
+              data3 = JSON.stringify(results[0].apellido_materno);            
+              console.log('nombre_persona:' + data1);
+              console.log('apellido_paterno:' + data2);
+              console.log('apellido_materno:' + data3);
+
+                //res.json(rows);
+                data1 = JSON.stringify(results[0].nombre_persona);
+                data2 = JSON.stringify(results[0].apellido_paterno);
+                data3 = JSON.stringify(results[0].apellido_materno);
+                console.log('nombre_persona:' + data1);
+                console.log('apellido_paterno:' + data2);
+                console.log('apellido_materno:' + data3);
+
+                let result1 = data1.substring(2, 1);
+                const result2 = data2.slice(1, -1)
+                console.log('apellido_paterno recortado:' + result2);
+                let result3 = data3.substring(2, 1);
+
+                console.log('nombre_persona:' + result1);
+                console.log('apellido_paterno:' + result2);
+                console.log('apellido_materno:' + result3);
+
+                const nombre_usuario_mayusculas = result1.concat(result2, result3);
+                var nombre_usuario = nombre_usuario_mayusculas.toLowerCase();
+                console.log('USUARIO A CREAR:' + nombre_usuario);
+
+                //INSERTAMOS AL NUEVO USUARIO
+                var query = `INSERT INTO usuarios (dni_persona, codigo_rol, nombre_usuario, pass, estado_usuario) 
+             VALUES ("${dni_persona}", "${codigo_rol}", "${nombre_usuario}", "${hashedPassword}", "Activo")
+             `;
+             conexion.query(query, function(error, data) {
+                    // console.log(action);
+                    console.log("Usuario registrado");
+                    res.json({
+                        message: 'Data Added'
+
+                    });
+                });
+
+
+            } else {
+                console.log(err);
+            }
+      
+          });
+        }
+   // }
+
+};
