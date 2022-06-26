@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Fixmort">
+    <meta name="generator" content="Fixmort 1.0.0">
+    <title>Sistema Register</title> 
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <% if(alert) { %>
+        <div class="alert alert-danger" role="alert">
+            <%= alertMessage %>
+        </div>
+    <% } %>
+    <main class="form-signin text-center shadow-lg p-3 mb-5">
+      <form action="/register" method="POST">        
+        <img class="mb-4" src="img/logo.png" alt="logo" width="50%" height="50%">
+        <div class="form-floating">
+          <input type="number" class="form-control" id="dni_persona" name="dni_persona" placeholder="DNI" autofocus required>
+          <label for="dni_persona">DNI/RUC</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" required>
+          <label for="pass">Contraseña</label>
+        </div>
+        <div class="form-floating">
+          <label>Seleeciona el Rol</label>
+          <select name="codigo_rol" id="codigo_rol" class="form-control">
+              <option value=""></option>
+              <option value="1">Administrador</option>
+              <option value="2">Produccion</option>
+              <option value="3">RRHH</option>
+              <option value="4">Ventas</option>
+              <option value="5">Almacen</option>
+              <option value="6">Gerencia</option>
+              <option value="7">Contabilidad</option>
+          </select>
+      </div>
+        <div  class="mb-3">          
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Save</button>   
+        </div>
+        <div>          
+          <a href="/login" type="button" class="w-100 btn btn-lg btn-bd-primary">Cancel</a> 
+        </div>
+      </form>
+    </main>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+  </body>
+</html>
