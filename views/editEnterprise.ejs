@@ -16,10 +16,9 @@
                 <div class="row">
                   <div class="col-md-6">
                     <form action="/updateEnterprise" method="POST">
-                      <input hidden id="id_empresas" name="id_empresas" value="<%= enterprise.id_empresas %>">
                       <div class="mb-3">
-                        <label for="ruc" class="form-label">RUC</label>
-                        <input type="number" class="form-control" id="ruc" name="ruc" value="<%= enterprise.ruc %>" tabindex="1" autofocus>              
+                        <label for="id_ruc" class="form-label">RUC</label>
+                        <input type="number" class="form-control" id="id_ruc" name="id_ruc" value="<%= enterprise.id_ruc %>" tabindex="1" autofocus>              
                       </div>
                       <div class="mb-3">
                         <label for="id_representante" class="form-label">Id Representante</label>

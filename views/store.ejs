@@ -4,35 +4,35 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <%- include('template/breadcrumb', {module: 'Enterprises'}) %>
+    <%- include('template/breadcrumb', {module: 'Almacén'}) %>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-md-12">            
             <div class="container">
-              <a href="/createEnterprise" class="btn btn-primary mb-2"> <i class="fa-regular fa-square-plus"></i></a>
+              <a href="/createStore" class="btn btn-primary mb-2"> <i class="fa-regular fa-square-plus"></i></a>
               <table id="example1" class="table table-bordered table-striped text-center mt-4">
                 <thead>
                   <tr class="bg-primary text-white">
-                    <th scope="col">RUC</th>
-                    <th scope="col">ID Representate</th>
-                    <th scope="col">Nombre Empresa</th>
-                    <th scope="col">Numero Contacto</th>
+                    <th scope="col">ID pieza</th>
+                    <th scope="col">Nombre pieza</th>
+                    <th scope="col">Descripcion pieza</th>
+                    <th scope="col">Stock pieza</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <% results.forEach ((enterprise) => { %>
+                  <% results.forEach ((store) => { %>
         
                     <tr>
-                      <th><%= enterprise.id_ruc %></th>
-                      <th><%= enterprise.id_representante %></th>
-                      <th><%= enterprise.nombre_empresa %></th>
-                      <th><%= enterprise.numero_contacto %></th>    
+                      <th><%= store.id_pieza %></th>
+                      <th><%= store.nombre_pieza %></th>
+                      <th><%= store.descripcion_pieza %></th>
+                      <th><%= store.stock_piezas %></th>
                       <td>
-                        <a href="/editEnterprise/<%= enterprise.id_ruc %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
-                        <a onclick="confirmation(<%= enterprise.id_ruc %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
+                        <a href="/editStore/<%= store.id_pieza %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
+                        <a onclick="confirmation(<%= store.id_pieza %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
                       </td>
                     </tr>                              
                   <% }) %>

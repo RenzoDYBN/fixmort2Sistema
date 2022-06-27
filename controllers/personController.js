@@ -2,59 +2,67 @@
 const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
 
-//procedure to save
-exports.savePerson = async(req, res) => {
+exports.savePerson = (req, res) => {
     const dni_persona = req.body.dni_persona
-    const pass = req.body.pass
-    const cpass = req.body.cpass
-    const codigo_rol = req.body.codigo_rol
-    const estado_usuario = req.body.estado_usuario
+    const nombre_persona = req.body.nombre_persona
+    const apellido_paterno = req.body.apellido_paterno
+    const apellido_materno = req.body.apellido_materno
+    const telefono = req.body.telefono
+    const correo_electronico = req.body.correo_electronico
+    const direccion_persona = req.body.direccion_persona
 
-    let passHash = await bcryptjs.hash(pass, 10)
-
-    conexion.query('SELECT nombre_persona,apellido_paterno,apellido_materno FROM personas WHERE dni_persona = ?', [dni_persona], (err, results, fields) => {
+    conexion.query('SELECT * FROM personas WHERE dni_persona = ?', [dni_persona], (err, results, fields) => {
         if (err) {
             confirm.log(err);
         }
         if (results.length > 0) {
-            return res.render("createUser", {
+            return res.render("createPerson", {
                 alert: true,
-                alertMessage: 'Este Usuario(DNI) ya existe'
+                alertMessage: 'La persona ya existe'
             });
-        } else if (pass !== cpass) {
-            return res.render("createUser", { alert: true,
-                alertMessage: 'Las contraseñas no coinciden' })
-        }
-            data1 = JSON.stringify(results[0].nombre_persona);
-            data2 = JSON.stringify(results[0].apellido_paterno);
-            data3 = JSON.stringify(results[0].apellido_materno);
+        } 
 
-            let result1 = data1.substring(2, 1);
-            const result2 = data2.slice(1, -1)
-            console.log('apellido_paterno recortado:' + result2);
-            let result3 = data3.substring(2, 1);
-
-            const nombre_usuario_mayusculas = result1.concat(result2, result3);
-            var nombre_usuario = nombre_usuario_mayusculas.toLowerCase();
-            console.log('USUARIO A CREAR:' + nombre_usuario);
-
-            //INSERTAMOS AL NUEVO USUARIO
-
-            //console.log(name + " - " + email + " - " + passHash)
-            conexion.query('INSERT INTO usuarios SET ?', {dni_persona: dni_persona,codigo_rol: Number(codigo_rol) ,nombre_usuario:nombre_usuario, pass: passHash, estado_usuario: "Activo"}, (error, results) => {
+            // INSERTAMOS NUEVA PERSONA
+            conexion.query('INSERT INTO personas SET ?', {dni_persona: dni_persona,nombre_persona: nombre_persona ,apellido_paterno:apellido_paterno, apellido_materno: apellido_materno, telefono: telefono, correo_electronico:correo_electronico, direccion_persona: direccion_persona}, (error, results) => {
             if(error) {
             console.error(error)
-            res.render('register', {
+            res.render('persons', {
                 alert: true,
-                alertMessage: 'Este usuario ya existe'
+                alertTitle: "Successful connection",
+                alertMessage: "¡CORRECT LOGIN!",
+                alertIcon:'success',
+                showConfirmButton: false,
+                timer: 800,
+                ruta: ''
+                //alert: true,
+                //alertMessage: 'Esta persona ya existe'
             })
             } else {   
             res.redirect('/')
          }
         }); 
-});
+    });
 };
 
+exports.updatePerson =  (req, res) => {
+    const dni_persona = req.body.dni_persona
+    const nombre_persona = req.body.nombre_persona
+    const apellido_paterno = req.body.apellido_paterno
+    const apellido_materno = req.body.apellido_materno
+    const telefono = req.body.telefono
+    const correo_electronico = req.body.correo_electronico
+    const direccion_persona = req.body.direccion_persona
+
+    conexion.query('UPDATE personas SET ? WHERE dni_persona = ?', [{ dni_persona:dni_persona, nombre_persona:nombre_persona, apellido_paterno:apellido_paterno, apellido_materno:apellido_materno, telefono:telefono, correo_electronico:correo_electronico, direccion_persona:direccion_persona}, dni_persona ], (error, results) => {
+        if(error) {
+            console.error(error)
+        } else {
+            res.redirect('/');
+        }
+    })
+}
+
+/*
 //procedure to update
 exports.updatePerson =  async(req, res) => {
     const usuario = req.body.usuario
@@ -71,4 +79,4 @@ exports.updatePerson =  async(req, res) => {
             res.redirect('/');
         }
     })
-}
+}*/
