@@ -1,0 +1,57 @@
+<%- include("template/header") %>
+<%- include("template/navbar") %>
+<%- include("template/aside") %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <%- include('template/breadcrumb', {module: 'Representantes'}) %>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-md-12">            
+            <div class="container">
+              <a href="/createRepresentante" class="btn btn-primary mb-2"> <i class="fa-regular fa-square-plus"></i></a>
+              <table id="example1" class="table table-bordered table-striped text-center mt-4">
+                <thead>
+                  <tr class="bg-primary text-white">
+                    <th scope="col">Id</th>
+                    <th scope="col">Dni</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Materno</th>
+                    <th scope="col">Correo Electronico</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% results.forEach ((representante) => { %>
+        
+                    <tr>
+                      <th><%= representante.id_representante %></th>
+                      <th><%= representante.dni_representante %></th>
+                      <th><%= representante.nombre_representante %></th>
+                      <th><%= representante.apellido_paterno_representante %></th>
+                      <th><%= representante.apellido_materno_representante%></th>
+                      <th><%= representante.correo_representante %></th>
+                      <th><%= representante.telefono_representante %></th>
+                      <td>
+                        <a href="/editRepresentante/<%= representante.id_representante %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
+                        <a onclick="confirmation(<%= representante.id_representante %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
+                      </td>
+                    </tr>                              
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <%- include("template/footer") %>

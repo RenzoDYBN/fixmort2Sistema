@@ -3,13 +3,13 @@ const conexion = require('../database/db')
 
 //procedure to save
 exports.saveEnterprise = (req, res) => {
-    const ruc = req.body.ruc
+    const id_ruc = req.body.id_ruc
     const id_representante = req.body.id_representante
     const nombre_empresa = req.body.nombre_empresa
     const numero_contacto = req.body.numero_contacto
 
 
-    conexion.query('SELECT * FROM empresas WHERE ruc = ?', [ruc], (err, results, fields) => {
+    conexion.query('SELECT * FROM empresas WHERE id_ruc = ?', [id_ruc], (err, results, fields) => {
         if (err) {
             confirm.log(err);
         }
@@ -21,7 +21,7 @@ exports.saveEnterprise = (req, res) => {
         } 
 
             // INSERTAMOS NUEVA EMPRESA
-            conexion.query('INSERT INTO empresas SET ?', {ruc: ruc,id_representante: id_representante ,nombre_empresa:nombre_empresa, numero_contacto: numero_contacto}, (error, results) => {
+            conexion.query('INSERT INTO empresas SET ?', {id_ruc: id_ruc,id_representante: id_representante ,nombre_empresa:nombre_empresa, numero_contacto: numero_contacto}, (error, results) => {
             if(error) {
             console.error(error)
             res.render('enterprises', {
@@ -29,7 +29,7 @@ exports.saveEnterprise = (req, res) => {
                 alertMessage: 'Esta Empresa ya existe'
             })
             } else {   
-            res.redirect('/')
+            res.redirect('/enterprises')
          }
         }); 
     });
@@ -37,17 +37,20 @@ exports.saveEnterprise = (req, res) => {
 
 //procedure to update
 exports.updateEnterprise =  (req, res) => {
-    const id_empresas = req.body.id_empresas
-    const ruc = req.body.ruc
-    const id_representante = req.body.id_representante
-    const nombre_empresa = req.body.nombre_empresa
-    const numero_contacto = req.body.numero_contacto
+    // const id_empresas = req.body.id_empresas
+    const id_ruc = req.body.id_ruc 
+    // const id_representante = req.body.id_representante
+    // const nombre_empresa = req.body.nombre_empresa
+    // const numero_contacto = req.body.numero_contacto
 
-    conexion.query('UPDATE empresas SET ? WHERE id_empresas = ?', [{ ruc:ruc, id_representante:id_representante, nombre_empresa:nombre_empresa, numero_contacto:numero_contacto}, id_empresas ], (error, results) => {
+
+    conexion.query('UPDATE empresas SET ? WHERE id_ruc != ?', [req.body, id_ruc ], (error, results) => {
         if(error) {
             console.error(error)
         } else {
-            res.redirect('/');
+            console.log(error);
+            console.log(results);
+            res.redirect('/enterprises');
         }
     })
 }
