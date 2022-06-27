@@ -6,6 +6,7 @@ const userController = require('../controllers/userController')
 const personController = require('../controllers/personController')
 const enterpriseController = require('../controllers/enterpriseController')
 const authController = require('../controllers/authController')
+const storeController = require('../controllers/storeController')
 const { Router } = require('express')
 
 
@@ -222,5 +223,64 @@ router.post('/upload/:usuario', (req, res) => {
         }
     })
 })
+
+//path to retrieve all users
+router.get('/store', authController.isAuthenticated, (req, res) => {
+    // res.send('hola mundo')    
+    conexion.query('SELECT * FROM almacen', (error, results) => {
+        if(error){
+            throw error;
+        } else {
+            // res.send(results);
+            if (row.codigo_rol == 1) { 
+                res.render('store', { results: results, titleWeb: "List store" })
+            } else {
+                res.render('index', { userName: row.name, image: row.image, titleWeb: "Almacen"})
+            }
+        }
+    })
+})
+
+//path to create a record
+router.get('/createStore', authController.isAuthenticated, (req, res) => {
+    if (row.codigo_rol=="1") {        
+        res.render('createStore', { titleWeb: "Create Store"})
+    } else {
+        res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+    }
+})
+
+
+router.get('/editStore/:id_pieza', authController.isAuthenticated, (req, res) => {
+    const id_pieza = req.params.id_pieza;
+    conexion.query('SELECT * FROM almacen WHERE id_pieza= ?', [id_pieza], (error, results) => {
+        if(error){
+            throw error;
+        } else {
+            if(row.codigo_rol=="1") {
+                res.render('editStore', { store: results[0], titleWeb: "Edit store" })
+            } else {
+                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+            }
+        }
+    })
+})
+//path to delete a selected record
+router.get('/deleteStore/:id_pieza', (req, res) => {
+    const id_pieza = req.params.id_pieza
+    conexion.query('DELETE FROM almacen WHERE id_pieza = ?', [id_pieza], (error, results) => {
+        if(error){
+            throw error;
+        } else {
+            res.redirect('/store')
+        }
+    })
+});
+
+
+
+router.post('/addPiece', storeController.addPiece)
+router.post('/updateStore', storeController.updatePiece)
+
 
 module.exports = router;
