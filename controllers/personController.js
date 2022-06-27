@@ -28,7 +28,14 @@ exports.savePerson = (req, res) => {
             console.error(error)
             res.render('persons', {
                 alert: true,
-                alertMessage: 'Esta persona ya existe'
+                alertTitle: "Successful connection",
+                alertMessage: "¡CORRECT LOGIN!",
+                alertIcon:'success',
+                showConfirmButton: false,
+                timer: 800,
+                ruta: ''
+                //alert: true,
+                //alertMessage: 'Esta persona ya existe'
             })
             } else {   
             res.redirect('/')
@@ -37,6 +44,25 @@ exports.savePerson = (req, res) => {
     });
 };
 
+exports.updatePerson =  (req, res) => {
+    const dni_persona = req.body.dni_persona
+    const nombre_persona = req.body.nombre_persona
+    const apellido_paterno = req.body.apellido_paterno
+    const apellido_materno = req.body.apellido_materno
+    const telefono = req.body.telefono
+    const correo_electronico = req.body.correo_electronico
+    const direccion_persona = req.body.direccion_persona
+
+    conexion.query('UPDATE personas SET ? WHERE dni_persona = ?', [{ dni_persona:dni_persona, nombre_persona:nombre_persona, apellido_paterno:apellido_paterno, apellido_materno:apellido_materno, telefono:telefono, correo_electronico:correo_electronico, direccion_persona:direccion_persona}, dni_persona ], (error, results) => {
+        if(error) {
+            console.error(error)
+        } else {
+            res.redirect('/');
+        }
+    })
+}
+
+/*
 //procedure to update
 exports.updatePerson =  async(req, res) => {
     const usuario = req.body.usuario
@@ -53,4 +79,4 @@ exports.updatePerson =  async(req, res) => {
             res.redirect('/');
         }
     })
-}
+}*/

@@ -118,7 +118,7 @@ router.get('/editPerson/:dni_persona', authController.isAuthenticated, (req, res
 })
 
 //path to delete a selected person record
-router.get('/deleteUser/:dni_persona', (req, res) => {
+router.get('/deletePerson/:dni_persona', (req, res) => {
     const dni_persona = req.params.dni_persona
     conexion.query('DELETE FROM personas WHERE dni_persona= ?', [dni_persona], (error, results) => {
         if(error){
