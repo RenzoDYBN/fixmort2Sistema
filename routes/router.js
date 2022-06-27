@@ -5,6 +5,7 @@ const router = express.Router()
 const userController = require('../controllers/userController')
 const personController = require('../controllers/personController')
 const enterpriseController = require('../controllers/enterpriseController')
+const representanteController = require('../controllers/representanteController')
 const authController = require('../controllers/authController')
 const storeController = require('../controllers/storeController')
 const { Router } = require('express')
@@ -108,7 +109,7 @@ router.get('/editPerson/:dni_persona', authController.isAuthenticated, (req, res
             throw error;
         } else {
             if(row.codigo_rol=="1") {
-                res.render('editPerson', { user: results[0], titleWeb: "Edit person" })
+                res.render('editPerson', { person: results[0], titleWeb: "Edit person" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
@@ -118,7 +119,7 @@ router.get('/editPerson/:dni_persona', authController.isAuthenticated, (req, res
 
 //path to delete a selected person record
 router.get('/deleteUser/:dni_persona', (req, res) => {
-    const usuario = req.params.usuario
+    const dni_persona = req.params.dni_persona
     conexion.query('DELETE FROM personas WHERE dni_persona= ?', [dni_persona], (error, results) => {
         if(error){
             throw error;
@@ -131,6 +132,65 @@ router.get('/deleteUser/:dni_persona', (req, res) => {
 router.post('/savePerson', personController.savePerson)
 router.post('/updatePerson', personController.updatePerson)
 
+
+
+//REPRESENTATE RUTAS Y FRONT
+router.get('/representantes', authController.isAuthenticated, (req, res) => {
+    // res.send('hola mundo')    
+    conexion.query('SELECT * FROM representante', (error, results) => {
+        if(error){
+            throw error;
+        } else {
+            // res.send(results);
+            if (row.codigo_rol=="1") { 
+                res.render('representantes', { results: results, titleWeb: "List Representante" })
+            } else {
+                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+            }
+        }
+    })
+})
+
+
+//path to create a agent record
+router.get('/createRepresentante', authController.isAuthenticated, (req, res) => {
+    if (row.codigo_rol=="1") {        
+        res.render('createRepresentante', { titleWeb: "Create Representante"})
+    } else {
+        res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+    }
+})
+
+//path to edit a selected agent record
+router.get('/editRepresentante/:id_representante', authController.isAuthenticated, (req, res) => {
+    const id_representante = req.params.id_representante;
+    conexion.query('SELECT * FROM representante WHERE id_representante= ?', [id_representante], (error, results) => {
+        if(error){
+            throw error;
+        } else {
+            if(row.codigo_rol=="1") {
+                res.render('editRepresentante', { representante: results[0], titleWeb: "Edit Representante" })
+            } else {
+                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+            }
+        }
+    })
+})
+
+//path to delete a selected agent record
+router.get('/deleteRepresentante/:id_representante', (req, res) => {
+    const id_representante = req.params.id_representante
+    conexion.query('DELETE FROM representante WHERE id_representante= ?', [id_representante], (error, results) => {
+        if(error){
+            throw error;
+        } else {
+            res.redirect('/representantes')
+        }
+    })
+});
+
+router.post('/saveRepresentante', representanteController.saveRepresentante)
+router.post('/updateRepresentante', representanteController.updateRepresentante)
 
 
 //EMPRESAS RUTAS Y FRONT
@@ -161,9 +221,9 @@ router.get('/createEnterprise', authController.isAuthenticated, (req, res) => {
 })
 
 //path to edit a selected person record
-router.get('/editEnterprise/:id_empresas', authController.isAuthenticated, (req, res) => {
-    const id_empresas = req.params.id_empresas;
-    conexion.query('SELECT * FROM empresas WHERE id_empresas= ?', [id_empresas], (error, results) => {
+router.get('/editEnterprise/:id_ruc', authController.isAuthenticated, (req, res) => {
+    const id_ruc = req.params.id_ruc;
+    conexion.query('SELECT * FROM empresas WHERE id_ruc= ?', [id_ruc], (error, results) => {
         if(error){
             throw error;
         } else {
@@ -177,9 +237,9 @@ router.get('/editEnterprise/:id_empresas', authController.isAuthenticated, (req,
 })
 
 //path to delete a selected person record
-router.get('/deleteEnterprise/:id_empresas', (req, res) => {
-    const id_empresas = req.params.id_empresas
-    conexion.query('DELETE FROM empresas WHERE id_empresas= ?', [id_empresas], (error, results) => {
+router.get('/deleteEnterprise/:id_ruc', (req, res) => {
+    const id_ruc = req.params.id_ruc
+    conexion.query('DELETE FROM empresas WHERE id_ruc= ?', [id_ruc], (error, results) => {
         if(error){
             throw error;
         } else {

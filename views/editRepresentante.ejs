@@ -1,0 +1,61 @@
+<%- include("template/header") %>
+<%- include("template/navbar") %>
+<%- include("template/aside") %> 
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <%- include('template/breadcrumb', {module: 'Edit Representante'}) %>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-md-12">
+            <% if (representante) { %>
+          
+              <div class="container">   
+                <div class="row">
+                  <div class="col-md-6">
+                    <form action="/updateRepresentante" method="POST">
+                      <input hidden id="id_representante" name="id_representante" value="<%= representante.id_representante %>">
+                      <div class="mb-3">
+                        <label for="dni_representante" class="form-label">DNI</label>
+                        <input type="number" class="form-control" id="dni_representante" name="dni_representante" value="<%= representante.dni_representante %>" tabindex="1" autofocus>              
+                      </div>
+                      <div class="mb-3">
+                        <label for="nombre_representante" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre_representante" name="nombre_representante" value="<%= representante.nombre_representante %>" tabindex="1" autofocus>              
+                      </div>
+                      <div class="mb-3">
+                        <label for="apellido_paterno_representante" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="apellido_paterno_representante" name="apellido_paterno_representante"  value="<%= representante.apellido_paterno_representante %>" tabindex="1" autofocus>              
+                      </div>
+                      <div class="mb-3">
+                        <label for="apellido_materno_representante" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control" id="apellido_materno_representante" name="apellido_materno_representante"  value="<%= representante.apellido_materno_representante %>" tabindex="1" autofocus>              
+                      </div>
+                      <div class="mb-3">
+                        <label for="correo_representante" class="form-label">Correo</label>
+                        <input type="email" class="form-control" id="correo_representante" name="correo_representante"  value="<%= representante.correo_representante %>" tabindex="1" autofocus>              
+                      </div>
+                      <div class="mb-3">
+                        <label for="telefono_representante" class="form-label">Telefono</label>
+                        <input type="number" class="form-control" id="telefono_representante" name="telefono_representante"  value="<%= representante.telefono_representante %>" tabindex="1" autofocus>              
+                      </div>                      
+                      <button type="submit" class="btn btn-primary" tabindex="4">Submit</button>
+                      <a href="/representantes" class="btn btn-secondary">Cancel</a>
+                    </form>
+                  </div>   
+                </div>  
+              </div>
+          
+          <% } %>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <%- include("template/footer") %>

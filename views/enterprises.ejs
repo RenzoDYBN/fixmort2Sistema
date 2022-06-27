@@ -15,7 +15,6 @@
               <table id="example1" class="table table-bordered table-striped text-center mt-4">
                 <thead>
                   <tr class="bg-primary text-white">
-                    <th scope="col">ID Empresas</th>
                     <th scope="col">RUC</th>
                     <th scope="col">ID Representate</th>
                     <th scope="col">Nombre Empresa</th>
@@ -27,14 +26,13 @@
                   <% results.forEach ((enterprise) => { %>
         
                     <tr>
-                      <th><%= enterprise.id_empresas %></th>
-                      <th><%= enterprise.ruc %></th>
+                      <th><%= enterprise.id_ruc %></th>
                       <th><%= enterprise.id_representante %></th>
                       <th><%= enterprise.nombre_empresa %></th>
                       <th><%= enterprise.numero_contacto %></th>    
                       <td>
-                        <a href="/editEnterprise/<%= enterprise.id_empresas %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
-                        <a onclick="confirmation(<%= enterprise.id_empresas %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
+                        <a href="/editEnterprise/<%= enterprise.id_ruc %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
+                        <a onclick="confirmation(<%= enterprise.id_ruc %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
                       </td>
                     </tr>                              
                   <% }) %>
