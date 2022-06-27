@@ -1,0 +1,53 @@
+<%- include("template/header") %>
+<%- include("template/navbar") %>
+<%- include("template/aside") %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <%- include('template/breadcrumb', {module: 'Enterprises'}) %>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-md-12">            
+            <div class="container">
+              <a href="/createEnterprise" class="btn btn-primary mb-2"> <i class="fa-regular fa-square-plus"></i></a>
+              <table id="example1" class="table table-bordered table-striped text-center mt-4">
+                <thead>
+                  <tr class="bg-primary text-white">
+                    <th scope="col">ID Empresas</th>
+                    <th scope="col">RUC</th>
+                    <th scope="col">ID Representate</th>
+                    <th scope="col">Nombre Empresa</th>
+                    <th scope="col">Numero Contacto</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% results.forEach ((enterprise) => { %>
+        
+                    <tr>
+                      <th><%= enterprise.id_empresas %></th>
+                      <th><%= enterprise.ruc %></th>
+                      <th><%= enterprise.id_representante %></th>
+                      <th><%= enterprise.nombre_empresa %></th>
+                      <th><%= enterprise.numero_contacto %></th>    
+                      <td>
+                        <a href="/editEnterprise/<%= enterprise.id_empresas %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
+                        <a onclick="confirmation(<%= enterprise.id_empresas %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
+                      </td>
+                    </tr>                              
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <%- include("template/footer") %>

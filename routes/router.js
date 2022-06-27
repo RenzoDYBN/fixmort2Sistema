@@ -4,6 +4,7 @@ const router = express.Router()
 //to invoke the methods for the CRUD of users
 const userController = require('../controllers/userController')
 const personController = require('../controllers/personController')
+const enterpriseController = require('../controllers/enterpriseController')
 const authController = require('../controllers/authController')
 const { Router } = require('express')
 
@@ -128,6 +129,66 @@ router.get('/deleteUser/:dni_persona', (req, res) => {
 
 router.post('/savePerson', personController.savePerson)
 router.post('/updatePerson', personController.updatePerson)
+
+
+
+//EMPRESAS RUTAS Y FRONT
+router.get('/enterprises', authController.isAuthenticated, (req, res) => {
+    // res.send('hola mundo')    
+    conexion.query('SELECT * FROM empresas', (error, results) => {
+        if(error){
+            throw error;
+        } else {
+            // res.send(results);
+            if (row.codigo_rol=="1") { 
+                res.render('enterprises', { results: results, titleWeb: "List Empresas" })
+            } else {
+                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+            }
+        }
+    })
+})
+
+
+//path to create a person record
+router.get('/createEnterprise', authController.isAuthenticated, (req, res) => {
+    if (row.codigo_rol=="1") {        
+        res.render('createEnterprise', { titleWeb: "Create Enterprise"})
+    } else {
+        res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+    }
+})
+
+//path to edit a selected person record
+router.get('/editEnterprise/:id_empresas', authController.isAuthenticated, (req, res) => {
+    const id_empresas = req.params.id_empresas;
+    conexion.query('SELECT * FROM empresas WHERE id_empresas= ?', [id_empresas], (error, results) => {
+        if(error){
+            throw error;
+        } else {
+            if(row.codigo_rol=="1") {
+                res.render('editEnterprise', { enterprise: results[0], titleWeb: "Edit Empresa" })
+            } else {
+                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+            }
+        }
+    })
+})
+
+//path to delete a selected person record
+router.get('/deleteEnterprise/:id_empresas', (req, res) => {
+    const id_empresas = req.params.id_empresas
+    conexion.query('DELETE FROM empresas WHERE id_empresas= ?', [id_empresas], (error, results) => {
+        if(error){
+            throw error;
+        } else {
+            res.redirect('/enterprises')
+        }
+    })
+});
+
+router.post('/saveEnterprise', enterpriseController.saveEnterprise)
+router.post('/updateEnterprise', enterpriseController.updateEnterprise)
 
 
 

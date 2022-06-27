@@ -1,0 +1,49 @@
+<%- include("template/header") %>
+<%- include("template/navbar") %>
+<%- include("template/aside") %>
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <%- include('template/breadcrumb', {module: 'Create enterprise'}) %>
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-md-12">
+           
+            <div class="container">              
+                <form action="/saveEnterprise" method="POST">
+                    <div class="mb-3">
+                      <label for="ruc" class="form-label">RUC</label>
+                      <input type="text" class="form-control" id="ruc" name="ruc" tabindex="1" autofocus>              
+                    </div>
+                    <div class="mb-3">
+                      <label for="id_representante" class="form-label">Id Representante</label>
+                      <input type="number" class="form-control" id="id_representante" name="id_representante" tabindex="1" >              
+                    </div>
+                    <div class="mb-3">
+                      <label for="nombre_empresa" class="form-label">Nombre Empresa</label>
+                      <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" tabindex="1" >              
+                    </div>
+                    <div class="mb-3">
+                      <label for="numero_contacto" class="form-label">Numero Contacto</label>
+                      <input type="number" class="form-control" id="numero_contacto" name="numero_contacto" tabindex="1" >              
+                    </div>            
+                    <button type="submit" class="btn btn-primary" tabindex="4">Submit</button>
+                    <a href="/enterprises" class="btn btn-secondary">Cancel</a>
+                  </form> 
+                </div>
+                  
+            </div>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <%- include("template/footer") %>
