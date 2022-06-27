@@ -38,7 +38,7 @@ exports.savePerson = (req, res) => {
                 //alertMessage: 'Esta persona ya existe'
             })
             } else {   
-            res.redirect('/')
+            res.redirect('/persons')
          }
         }); 
     });

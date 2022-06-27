@@ -124,14 +124,11 @@
 
   function registrar(){
     Swal.fire({
-      title: 'Registro Exitoso',
-      icon: 'success',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        result.render("persons");
-        // window.location = 'persons' ;
-      }
-    })
+  icon: 'success',
+  title: 'Registro Existoso',
+  showConfirmButton: false,
+  timer: 2000
+})
   }
 </script>
 </body>
