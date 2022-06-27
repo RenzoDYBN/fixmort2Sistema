@@ -121,6 +121,18 @@
       }
     })
   }
+
+  function registrar(){
+    Swal.fire({
+      title: 'Registro Exitoso',
+      icon: 'success',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        result.render("persons");
+        // window.location = 'persons' ;
+      }
+    })
+  }
 </script>
 </body>
 </html>
