@@ -9,13 +9,11 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
-      <% if(typeof userName != 'undefined'){ %>
+      <% if(typeof nombre_usuario != 'undefined'){ %>
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="./../uploads/<%= image %>" class="img-circle elevation-2" alt="User Image">
-        </div>
         <div class="info">
-          <a href="#" class="d-block"> <%= userName %></a>
+          <a href="#" class="d-block">Usuario: <%= nombre_usuario %></a>
+          <a href="#" class="d-block">Estado: <%= estado_usuario %></a>
         </div>
       </div>
       <% } %>
@@ -121,13 +119,13 @@
           </li>
           </li>
           <li class="nav-item">
-            <a href="/persons" class="nav-link">              
+            <a href="/store" class="nav-link">              
               <i class="nav-icon fas fa-solid fa-users"></i>
               <p>
-                Persons                
+                Almacen                
               </p>
             </a>
-          </li>          
+          </li>         
           <li class="nav-item">
             <a href="/logout" class="nav-link">
               <i class="nav-icon fas fa-solid fa-arrow-right-from-bracket"></i>
