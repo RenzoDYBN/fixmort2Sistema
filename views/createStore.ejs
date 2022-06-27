@@ -1,0 +1,44 @@
+<%- include("template/header") %>
+<%- include("template/navbar") %>
+<%- include("template/aside") %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <%- include('template/breadcrumb', {module: 'Agregar pieza'}) %>
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-md-12">
+           
+            <div class="container">              
+                <form action="/addPiece" method="POST">
+                    <div class="mb-3">
+                      <label for="nombre_pieza" class="form-label">Nombre pieza</label>
+                      <input type="text" class="form-control" id="nombre_pieza" name="nombre_pieza" tabindex="1" autofocus>              
+                    </div>
+                    <div class="mb-3">
+                      <label for="descripcion_pieza" class="form-label">Descripcion pieza</label>
+                      <input type="text" class="form-control" id="descripcion_pieza" name="descripcion_pieza" tabindex="2">
+                    </div>
+                    <div class="mb-3">
+                      <label for="stock_pieza" class="form-label">Stock pieza</label>
+                      <input type="number" class="form-control" id="stock_pieza" name="stock_pieza" tabindex="2">
+                    </div>                 
+                    <button type="submit" class="btn btn-primary" tabindex="4">Agregar</button>
+                    <a href="/store" class="btn btn-secondary">Cancelar</a>
+                  </form> 
+                </div>
+                  
+            </div>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  <%- include("template/footer") %>
