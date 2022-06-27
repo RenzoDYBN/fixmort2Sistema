@@ -108,7 +108,7 @@ router.get('/editPerson/:dni_persona', authController.isAuthenticated, (req, res
             throw error;
         } else {
             if(row.codigo_rol=="1") {
-                res.render('editPerson', { user: results[0], titleWeb: "Edit person" })
+                res.render('editPerson', { person: results[0], titleWeb: "Edit person" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
