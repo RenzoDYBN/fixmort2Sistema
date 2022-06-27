@@ -87,7 +87,7 @@ exports.login = async (req, res)=>{
                         expires: new Date(Date.now()+process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
                         httpOnly: true
                     }
-                    res.cookie('jwt', token, cookiesOptions)
+                    res.cookie('jwt', token, cookiesOptions);
                     res.render('login', {
                             alert: true,
                             alertTitle: "Successful connection",
@@ -122,12 +122,20 @@ exports.isAuthenticated = async (req, res, next)=>{
             return next()
         }
     }else{
+        // res.redirect('/') 
         res.redirect('/login')        
     }
 } 
 
 //procedure to logout
 exports.logout = (req, res) => {
+    // res.cookie('jwt', 'logout', {
+    //     expires: new Date(Date.now() + 2 * 1000),
+    //     httpOnly: true,
+    // });
+    // res.status(200).redirect("/login");
+
     res.clearCookie('jwt')   
-    return res.redirect('/login')
+    return res.redirect('/')
+    // return res.redirect('/login')
 }

@@ -9,13 +9,11 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
-      <% if(typeof userName != 'undefined'){ %>
+      <% if(typeof nombre_usuario != 'undefined'){ %>
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="./../uploads/<%= image %>" class="img-circle elevation-2" alt="User Image">
-        </div>
         <div class="info">
-          <a href="#" class="d-block"> <%= userName %></a>
+          <a href="#" class="d-block">Usuario: <%= nombre_usuario %></a>
+          <a href="#" class="d-block">Estado: <%= estado_usuario %></a>
         </div>
       </div>
       <% } %>
@@ -33,29 +31,98 @@
               <p>
                 Usuarios                
               </p>
+              <i class="right fas fa-angle-left"></i>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/users" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar Usuario</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/createUser" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Registrar Usuario</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a href="/persons" class="nav-link">              
-              <i class="nav-icon fas fa-solid fa-users"></i>
+            <a href="/persons" class="nav-link">    
+              <i class="nav-icon fas fa-solid fa-person"></i>
               <p>
                 Personas                
               </p>
+              <i class="right fas fa-angle-left"></i>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/persons" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar Personas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/createPerson" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Registrar Personas</p>
+                </a>
+              </li>
+            </ul>
           </li> 
           <li class="nav-item">
             <a href="/enterprises" class="nav-link">              
-              <i class="nav-icon fas fa-solid fa-users"></i>
+              <i class="fa-solid fa-industry"></i>
               <p>
                 Empresas                
               </p>
+              <i class="right fas fa-angle-left"></i>
             </a>
-          </li>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/enterprises" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar Empresa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/createEnterprises" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Registrar Empresa</p>
+                </a>
+              </li>
+            </ul>
+          </li>  
           <li class="nav-item">
             <a href="/representantes" class="nav-link">              
-              <i class="nav-icon fas fa-solid fa-users"></i>
+              <i class="nav-icon fa-solid fa-id-card"></i>
               <p>
                 Representantes                
+              </p>
+              <i class="right fas fa-angle-left"></i>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/representantes" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar Representante</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/createRepresentantes" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Registrar Representante</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          </li>
+          <li class="nav-item">
+            <a href="/store" class="nav-link">              
+              <i class="nav-icon fa-solid fa-boxes-stacked"></i>
+              <p>
+                Almacen                
               </p>
             </a>
           </li>  

@@ -26,7 +26,7 @@ router.get('/users', authController.isAuthenticated, (req, res) => {
         } else {
             // res.send(results);
             if (row.codigo_rol == 1) { 
-                res.render('users', { results: results, titleWeb: "List users" })
+                res.render('users', { results: results,nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "List users" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
@@ -37,7 +37,7 @@ router.get('/users', authController.isAuthenticated, (req, res) => {
 //path to create a record
 router.get('/createUser', authController.isAuthenticated, (req, res) => {
     if (row.codigo_rol=="1") {        
-        res.render('createUser', { titleWeb: "Create user"})
+        res.render('createUser', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario,titleWeb: "Create user"})
     } else {
         res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
     }
@@ -51,7 +51,7 @@ router.get('/editUser/:usuario', authController.isAuthenticated, (req, res) => {
             throw error;
         } else {
             if(row.codigo_rol=="1") {
-                res.render('editUser', { user: results[0], titleWeb: "Edit user" })
+                res.render('editUser', { user: results[0], nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Edit user" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
@@ -84,7 +84,7 @@ router.get('/persons', authController.isAuthenticated, (req, res) => {
         } else {
             // res.send(results);
             if (row.codigo_rol=="1") { 
-                res.render('persons', { results: results, titleWeb: "List persons" })
+                res.render('persons', { results: results, nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "List persons" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
@@ -95,7 +95,7 @@ router.get('/persons', authController.isAuthenticated, (req, res) => {
 //path to create a person record
 router.get('/createPerson', authController.isAuthenticated, (req, res) => {
     if (row.codigo_rol=="1") {        
-        res.render('createPerson', { titleWeb: "Create person"})
+        res.render('createPerson', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario,titleWeb: "Create person"})
     } else {
         res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
     }
@@ -109,7 +109,7 @@ router.get('/editPerson/:dni_persona', authController.isAuthenticated, (req, res
             throw error;
         } else {
             if(row.codigo_rol=="1") {
-                res.render('editPerson', { person: results[0], titleWeb: "Edit person" })
+                res.render('editPerson', { person: results[0],nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Edit person" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
@@ -118,7 +118,7 @@ router.get('/editPerson/:dni_persona', authController.isAuthenticated, (req, res
 })
 
 //path to delete a selected person record
-router.get('/deleteUser/:dni_persona', (req, res) => {
+router.get('/deletePerson/:dni_persona', (req, res) => {
     const dni_persona = req.params.dni_persona
     conexion.query('DELETE FROM personas WHERE dni_persona= ?', [dni_persona], (error, results) => {
         if(error){
@@ -143,7 +143,7 @@ router.get('/representantes', authController.isAuthenticated, (req, res) => {
         } else {
             // res.send(results);
             if (row.codigo_rol=="1") { 
-                res.render('representantes', { results: results, titleWeb: "List Representante" })
+                res.render('representantes', { results: results,nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "List Representante" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
@@ -155,7 +155,7 @@ router.get('/representantes', authController.isAuthenticated, (req, res) => {
 //path to create a agent record
 router.get('/createRepresentante', authController.isAuthenticated, (req, res) => {
     if (row.codigo_rol=="1") {        
-        res.render('createRepresentante', { titleWeb: "Create Representante"})
+        res.render('createRepresentante', {nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Create Representante"})
     } else {
         res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
     }
@@ -169,7 +169,7 @@ router.get('/editRepresentante/:id_representante', authController.isAuthenticate
             throw error;
         } else {
             if(row.codigo_rol=="1") {
-                res.render('editRepresentante', { representante: results[0], titleWeb: "Edit Representante" })
+                res.render('editRepresentante', { representante: results[0], nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Edit Representante" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
@@ -202,7 +202,7 @@ router.get('/enterprises', authController.isAuthenticated, (req, res) => {
         } else {
             // res.send(results);
             if (row.codigo_rol=="1") { 
-                res.render('enterprises', { results: results, titleWeb: "List Empresas" })
+                res.render('enterprises', { results: results, nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "List Empresas" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
@@ -214,7 +214,7 @@ router.get('/enterprises', authController.isAuthenticated, (req, res) => {
 //path to create a person record
 router.get('/createEnterprise', authController.isAuthenticated, (req, res) => {
     if (row.codigo_rol=="1") {        
-        res.render('createEnterprise', { titleWeb: "Create Enterprise"})
+        res.render('createEnterprise', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario,titleWeb: "Create Enterprise"})
     } else {
         res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
     }
@@ -228,7 +228,7 @@ router.get('/editEnterprise/:id_ruc', authController.isAuthenticated, (req, res)
             throw error;
         } else {
             if(row.codigo_rol=="1") {
-                res.render('editEnterprise', { enterprise: results[0], titleWeb: "Edit Empresa" })
+                res.render('editEnterprise', { enterprise: results[0], nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario,  titleWeb: "Edit Empresa" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }
@@ -255,7 +255,7 @@ router.post('/updateEnterprise', enterpriseController.updateEnterprise)
 
 //router for views
 router.get('/', authController.isAuthenticated, (req, res) => {
-    res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+    res.render('index', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Control Dashboard"})
 })
 
 router.get('/logout', authController.logout)
@@ -293,7 +293,7 @@ router.get('/store', authController.isAuthenticated, (req, res) => {
         } else {
             // res.send(results);
             if (row.codigo_rol == 1) { 
-                res.render('store', { results: results, titleWeb: "List store" })
+                res.render('store', { results: results, nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario,titleWeb: "List store" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Almacen"})
             }
@@ -304,7 +304,7 @@ router.get('/store', authController.isAuthenticated, (req, res) => {
 //path to create a record
 router.get('/createStore', authController.isAuthenticated, (req, res) => {
     if (row.codigo_rol=="1") {        
-        res.render('createStore', { titleWeb: "Create Store"})
+        res.render('createStore', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario,titleWeb: "Create Store"})
     } else {
         res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
     }
@@ -318,7 +318,7 @@ router.get('/editStore/:id_pieza', authController.isAuthenticated, (req, res) =>
             throw error;
         } else {
             if(row.codigo_rol=="1") {
-                res.render('editStore', { store: results[0], titleWeb: "Edit store" })
+                res.render('editStore', { store: results[0], nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario,titleWeb: "Edit store" })
             } else {
                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
             }

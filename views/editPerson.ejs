@@ -4,7 +4,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <%- include('template/breadcrumb', {module: 'Edit person'}) %>
+    <%- include('template/breadcrumb', {module: 'Editar Persona'}) %>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -14,12 +14,14 @@
           
               <div class="container">   
                 <div class="row">
-                  <div class="col-md-6">
-                    <form action="/updatePerson" method="POST">
+                  <div class="col-md-6 l-form">
+                    <form action="/updatePerson" method="POST" id="formulario" class="formulario">
                       <!-- <input hidden id="dni_persona" name="dni_persona" value="<%= person.dni_persona %>"> -->
-                      <div class="mb-3">
-                        <label for="dni_persona" class="form-label">DNI</label>
-                        <input type="number" class="form-control" id="dni_persona" name="dni_persona" value="<%= person.dni_persona %>" tabindex="1" autofocus>              
+                      <div class="flexbox">
+
+                        <div class="mb-3 formulario__div">
+                        <input type="number" class="formulario__input" id="dni_persona" name="dni_persona" value="<%= person.dni_persona %>" tabindex="1" autofocus placeholder=" ">   
+                        <label for="dni_persona" class="formulario__label">DNI</label>
                       </div>
                       <div class="mb-3">
                         <label for="nombre_persona" class="form-label">Nombre Persona</label>
@@ -47,6 +49,9 @@
                       </div>                      
                       <button type="submit" class="btn btn-primary" tabindex="4">Submit</button>
                       <a href="/persons" class="btn btn-secondary">Cancel</a>
+
+                      </div>
+                      
                     </form>
                   </div>   
                 </div>  
