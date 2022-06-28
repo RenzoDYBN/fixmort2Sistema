@@ -1,0 +1,180 @@
+<%- include("template/header") %>
+<%- include("template/navbar") %>
+<%- include("template/aside") %>
+<link rel="stylesheet" href="css/mobiscroll.javascript.min.css">
+    <script src="js/mobiscroll.javascript.min.js"></script>
+<div class="content-wrapper">
+  <%- include('template/breadcrumb', {module: 'Create enterprise'}) %>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <div class="container">
+            <form action="/saveEnterprise" method="POST">
+                    <fieldset class="formulario__campo empresa">
+                        <legend>Datos de la empresa</legend>
+                        <div class="formulario__div">
+                            <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" name="num_ruc" id="num_ruc" class="formulario__input" placeholder=" " maxlength="11" max="99999999999">
+                            <label for="ruc" class="formulario__label">RUC</label>
+                        </div>
+                        <div class="formulario__div">
+                            <input type="text" name="nombreemp" id="nombreemp" class="formulario__input" placeholder=" ">
+                            <label for="nombreemp" class="formulario__label">Nombre empresa</label>
+                        </div>
+                        <button type="button" class="formulario__boton-single slide b"><span>Buscar</span></button>
+                    </fieldset> 
+                    <fieldset class="formulario__campo datosMotor">
+                        <legend>Datos del motor</legend>
+                        <div class="formulario__div">
+                            <input type="text" name="placamot" id="placamot" class="formulario__input" placeholder=" ">
+                            <label for="placamot" class="formulario__label">Placa de motor</label>
+                        </div>
+                        <div class="formulario__div">
+                            <input type="text" name="desmot" id="desmot" class="formulario__input" placeholder=" ">
+                            <label for="desmot" class="formulario__label">Descripción de motor</label>
+                        </div>
+                    </fieldset>   
+                    <fieldset class="formulario__campo servicio">
+                        <legend>Servicio</legend>                
+                        <div class="grid">
+                          <% results.forEach ((cotiz) => { %>
+                          <p><%= cotiz.codigo_rol %></p>
+                          <p><%= cotiz.nombre_rol %></p>
+                          <p><%= cotiz.descripcion_rol %></p>
+
+
+                            <% }) %>
+
+                          <div mbsc-page class="demo-image-text">
+                            <div style="height:100%">
+                                <label>
+                                  Servicios
+                                  <input mbsc-input id="demo-image-text"  data-dropdown="true" data-tags="true" data-input-style="box" data-label-style="stacked" placeholder="Selecciona los Servicios" />
+                              </label>
+                            </div>
+                          </div>
+                          <div class="formulario__div">
+                            <select onclick="(seleccionSer)" name="listserv" id="listserv" class="formulario__select-input">
+                                <option value=""></option>
+                                <option value="Administrador">person.dni_persona</option>
+                                <option value="Produccion">Produccion</option>
+                                <option value="RRHH">RRHH</option>
+                                <option value="Ventas">Ventas</option>
+                                <option value="Almacen">Almacen</option>
+                                <option value="Gerencia">Gerencia</option>
+                                <option value="Contabilidad">Contabilidad</option>
+                            </select>
+                            <label for="listserv" class="formulario__select-label">Tiem. de entrega</label>
+                        </div>
+                            <!-- <button type="submit" class="formulario__boton-single slide b"><span>Agregar >></span></button>
+                            <button type="submit" class="formulario__boton-single slide c" ><span>Quitar <<</span></button> -->
+                            <div class="formulario__div d">
+                                <textarea rows="10" cols="50" class="formulario__input" name="listserv" id="listserv" placeholder=" " ></textarea>
+                                <label for="listserv" class="formulario__label">Listado de servicios</label>
+                            </div>
+                            <div class="formulario__div e">
+                                <textarea rows="4" class="formulario__input" name="description" id="description" placeholder=" " ></textarea>
+                                <label for="description" class="formulario__label">Descripción</label>
+                            </div>
+                            
+                        </div>
+                    </fieldset> 
+                    <fieldset class="formulario__campo">
+                        <legend>Condiciones</legend>
+                        <div class="formulario__div num_tie_entr">
+                            <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" name="num-tiemp-entrega" id="num-tiemp-entrega" class="formulario__input" placeholder=" " maxlength="2" max="999">
+                            <label for="num-tiemp-entrega" class="formulario__label">N°</label>
+                        </div>
+                        <div class="formulario__div">
+                            <select name="area" id="area" class="formulario__select-input">
+                                <option value=""></option>
+                                <option value="d">Días</option>
+                                <option value="m">Meses</option>
+                                <option value="a">Años</option>
+                            </select>
+                            <label for="area" class="formulario__select-label">Tiem. de entrega</label>
+                        </div>
+                        <div class="formulario__div num_for_pag">
+                            <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" name="num-forma-pago" id="num-forma-pago" class="formulario__input" placeholder=" " maxlength="2" max="999">
+                            <label for="num-forma-pago" class="formulario__label">N°</label>
+                        </div>
+                        <div class="formulario__div">
+                            <select name="area" id="area" class="formulario__select-input">
+                                <option value=""></option>
+                                <option value="d">Días</option>
+                                <option value="m">Meses</option>
+                                <option value="a">Años</option>
+                            </select>
+                            <label for="area" class="formulario__select-label">Forma de pago</label>
+                        </div>
+                        <div class="formulario__div num_gara">
+                            <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" name="num-gara" id="num-gara" class="formulario__input" placeholder=" " maxlength="2" max="999">
+                            <label for="num-gara" class="formulario__label">N°</label>
+                        </div>
+                        <div class="formulario__div">
+                            <select name="area" id="area" class="formulario__select-input">
+                                <option value=""></option>
+                                <option value="d">Días</option>
+                                <option value="m">Meses</option>
+                                <option value="a">Años</option>
+                            </select>
+                            <label for="area" class="formulario__select-label">Garantia</label>
+                        </div>
+                    </fieldset>
+                </div>
+                <p class="warnings" id="warnings"></p>
+                <div class="formulario__div-botones" style="text-align:center;">
+                    <input type="button" class="formulario__boton slide" value="Registrar" onclick="verInput()">
+                    <input type="submit" class="formulario__boton slide" value="Cancelar">
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+  <script>
+    function seleccionSer() {
+        console.log("hola");
+    }
+
+
+  let data= JSON.parse('<%-JSON.stringify(results)%>')
+  
+  console.log(data);
+const json_input = {data};
+    console.log(json_input);
+
+  for (let i= 0; i < data.length; i += 1) {
+    const element = data[i].nombre_rol;
+    console.log(element);
+ }
+ console.log("ANTES");
+ console.log(data);
+
+ console.log("despues");
+
+      mobiscroll.setOptions({
+          locale: mobiscroll.localeEs,   // Specify language like: locale: mobiscroll.localePl or omit setting to use default
+          theme: 'ios',                  // Specify theme like: theme: 'ios' or omit setting to use default
+          themeVariant: 'light'          // More info about themeVariant: https://docs.mobiscroll.com/5-17-1/javascript/select#opt-themeVariant
+      });
+
+      console.log(data);
+      console.log("entrando mobi");
+      console.log(Object.getOwnPropertyNames(data));
+      mobiscroll.select('#demo-image-text', {
+          display: 'anchored',           // Specify display mode like: display: 'bottom' or omit setting to use default
+          itemHeight: 50,                // More info about itemHeight: https://docs.mobiscroll.com/5-17-1/javascript/select#opt-itemHeight
+          data: data,
+          selectMultiple: true,          // More info about selectMultiple: https://docs.mobiscroll.com/5-17-1/javascript/select#opt-selectMultiple
+          renderItem: function (data) {  // More info about renderItem: https://docs.mobiscroll.com/5-17-1/javascript/select#opt-renderItem
+              return  
+                console.log("hola")
+                  '<div class="md-image-text-name">' + data.text + '</div>' 
+                  console.log("Hola");
+          }
+      
+      });
+      console.log(data);
+  </script>
+

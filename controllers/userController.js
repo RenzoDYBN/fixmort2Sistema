@@ -182,11 +182,11 @@ exports.updateUser =  async(req, res) => {
     const estado_usuario = req.body.estado_usuario
 
     let passHash = await bcryptjs.hash(pass, 10)
-    conexion.query('UPDATE usuarios SET ? WHERE usuario = ?', [{ dni_persona:dni_persona, pass:passHash, codigo_rol:codigo_rol, estado_usuario:estado_usuario}, usuario ], (error, results) => {
+    conexion.query('UPDATE usuarios SET ? WHERE usuario = ?', [{pass:passHash, codigo_rol:codigo_rol, estado_usuario:estado_usuario}, usuario ], (error, results) => {
         if(error) {
             console.error(error)
         } else {
-            res.redirect('/');
+            res.redirect('/users');
         }
     })
 }
