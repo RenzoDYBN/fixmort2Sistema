@@ -41,7 +41,7 @@
       "pageLength" : 5,
       "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
       "responsive": false, "lengthChange": true, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
@@ -126,6 +126,15 @@
     Swal.fire({
   icon: 'success',
   title: 'Registro Existoso',
+  showConfirmButton: false,
+  timer: 2000
+})
+  }
+
+  function editar(){
+    Swal.fire({
+  icon: 'success',
+  title: 'Edición Existosa',
   showConfirmButton: false,
   timer: 2000
 })

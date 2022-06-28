@@ -45,19 +45,15 @@ exports.savePerson = (req, res) => {
 };
 
 exports.updatePerson =  (req, res) => {
-    const dni_persona = req.body.dni_persona
-    const nombre_persona = req.body.nombre_persona
-    const apellido_paterno = req.body.apellido_paterno
-    const apellido_materno = req.body.apellido_materno
-    const telefono = req.body.telefono
-    const correo_electronico = req.body.correo_electronico
-    const direccion_persona = req.body.direccion_persona
+    dni_persona = req.body.dni_persona
 
-    conexion.query('UPDATE personas SET ? WHERE dni_persona = ?', [{ dni_persona:dni_persona, nombre_persona:nombre_persona, apellido_paterno:apellido_paterno, apellido_materno:apellido_materno, telefono:telefono, correo_electronico:correo_electronico, direccion_persona:direccion_persona}, dni_persona ], (error, results) => {
+    conexion.query('UPDATE personas SET ? WHERE dni_persona = ?', [req.body, dni_persona], (error, results) => {
         if(error) {
             console.error(error)
         } else {
-            res.redirect('/');
+            console.log(error);
+            console.log(results);
+            res.redirect('/persons');
         }
     })
 }
