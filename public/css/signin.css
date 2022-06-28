@@ -42,20 +42,22 @@ body {
 .form-signin {
   color: black;
   width: 100%;
-  max-width: 330px;
-  padding: 15px;
+  max-width: 460px;
+  padding: 2.5rem 3rem !important;
   margin: auto;
-  background: rgba(28, 28, 28, 0.554);
+  background: #1c1c1c8d;
   position: absolute;
-  left: calc(50% - 165px);
-  top: calc(50% - 200px);
-  height:400px;
+  left: calc(50% - 230px);
+  top: calc(50% - 215px);
+  height: 430px;
   box-shadow: 0px 0px 12px 6px #252a26;;
 }
 
 .form-signin h1 {
   color:white;
-  margin: 1rem 0 2rem;
+  margin: 1rem 0 3rem;
+  text-decoration: underline;
+  text-underline-offset: 6pt;
 }
 
 .form-signin .checkbox {

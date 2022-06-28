@@ -3,10 +3,10 @@
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-chevron-circle-left"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/" class="nav-link">Bienvenido</a>
+        <a style="padding-top: 0px;" href="/" class="nav-link">Bienvenido <span style="font-size:1.5rem;"><%= nombre_usuario %></span> </a>
       </li>      
     </ul>
 
@@ -20,4 +20,11 @@
       </li>
     </ul>
   </nav>
+  <script>
+        let sidebarBtn = document.querySelector(".fa-chevron-circle-left");
+        sidebarBtn.addEventListener("click", (e) => {
+            let arrowSidebar = e.target
+            arrowSidebar.classList.toggle("flechaSidebar");
+        });
+  </script>
   <!-- /.navbar -->
