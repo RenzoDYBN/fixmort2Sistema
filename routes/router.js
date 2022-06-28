@@ -8,6 +8,8 @@ const enterpriseController = require('../controllers/enterpriseController')
 const representanteController = require('../controllers/representanteController')
 const authController = require('../controllers/authController')
 const storeController = require('../controllers/storeController')
+// const cotizController = require('../controllers/cotizController')
+
 const { Router } = require('express')
 
 
@@ -342,5 +344,65 @@ router.get('/deleteStore/:id_pieza', (req, res) => {
 router.post('/addPiece', storeController.addPiece)
 router.post('/updateStore', storeController.updatePiece)
 
+
+
+//COTIZACIONES RUTAS Y FRONT
+router.get('/createCotizacion', authController.isAuthenticated, (req, res) => {
+    // res.send('hola mundo')    
+    conexion.query('SELECT * FROM roles_usuario', (error, results) => {
+        if(error){
+            throw error;
+        } else {
+            // res.send(results);
+            if (row.codigo_rol=="1") { 
+                res.render('createCotizacion', { results: results, nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "List persons" })
+                console.log(results);
+            } else {
+                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+            }
+        }
+    })
+})
+
+
+//path to create a person record
+// router.get('/createCotizacion', authController.isAuthenticated, (req, res) => {
+//     if (row.codigo_rol=="1") {        
+//         res.render('createCotizacion', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario,titleWeb: "Create person"})
+//     } else {
+//         res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+//     }
+// })
+
+//path to edit a selected person record
+// router.get('/editPerson/:dni_persona', authController.isAuthenticated, (req, res) => {
+//     const dni_persona = req.params.dni_persona;
+//     conexion.query('SELECT * FROM personas WHERE dni_persona= ?', [dni_persona], (error, results) => {
+//         if(error){
+//             throw error;
+//         } else {
+//             if(row.codigo_rol=="1") {
+//                 res.render('editPerson', { person: results[0],nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Edit person" })
+//             } else {
+//                 res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+//             }
+//         }
+//     })
+// })
+
+//path to delete a selected person record
+// router.get('/deletePerson/:dni_persona', (req, res) => {
+//     const dni_persona = req.params.dni_persona
+//     conexion.query('DELETE FROM personas WHERE dni_persona= ?', [dni_persona], (error, results) => {
+//         if(error){
+//             throw error;
+//         } else {
+//             res.redirect('/persons')
+//         }
+//     })
+// });
+
+// router.post('/savePerson', personController.savePerson)
+// router.post('/updatePerson', personController.updatePerson)
 
 module.exports = router;
