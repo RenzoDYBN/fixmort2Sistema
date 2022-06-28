@@ -20,7 +20,8 @@ exports.addPiece = (req, res) => {
                             console.log(error);
                         } else {
                             console.log(result);
-                            return res.render("createStore", { msg: "Registro Exitoso", msg_type: "good" })
+                            res.redirect('/store');
+                            //return res.render("createStore", { msg: "Registro Exitoso", msg_type: "good" })
                         }
                     })
             }
@@ -28,17 +29,15 @@ exports.addPiece = (req, res) => {
 };
 
 exports.updatePiece = async(req, res) => {
-    //const id_pieza =  "1";
+
     const id_pieza_buscada = req.body.id_pieza;
-    conexion.query('UPDATE almacen set ? WHERE id_piezas = ?', [req.body, id_pieza_buscada], (err, rows, fields) => {
-        if (!err) {
-            console.log('LLEGO AL ACTUALIZAR')
-            res.json(rows);
-
+    console.log("piesa buscada: "+ id_pieza_buscada + req.body.nombre_pieza)
+    conexion.query('UPDATE almacen set ? WHERE id_pieza = ?', [{ nombre_pieza:req.body.nombre_pieza, descripcion_pieza :req.body.descripcion_pieza, stock_piezas:req.body.stock_piezas}, id_pieza_buscada], (error, rows, fields) => {
+        if(error) {
+            console.error(error)
         } else {
-            console.log(err);
+            res.redirect('/store');
         }
-
     });
 
 }

@@ -103,3 +103,16 @@ nombre_empresa VARCHAR(50) NOT NULL,
 numero_contacto INT(09) NOT NULL,
 CONSTRAINT fk_repr FOREIGN KEY(id_representante) REFERENCES representante(id_representante)
 )
+
+CREATE TABLE usuarios(usuario INT(09) NOT NULL AUTO_INCREMENT PRIMARY KEY, dni_persona INT(09) NOT NULL, codigo_rol INT(04) NOT NULL,
+nombre_usuario VARCHAR(20) NOT NULL, contrasena VARCHAR(8) NOT NULL, estado_usuario VARCHAR(50) NOT NULL,
+CONSTRAINT fk_rol FOREIGN KEY(codigo_rol) REFERENCES roles_usuario(codigo_rol),
+CONSTRAINT fk_per FOREIGN KEY(dni_persona) REFERENCES personas(dni_persona))
+
+CREATE TABLE roles_usuario(codigo_rol INT(04) NOT NULL PRIMARY KEY, 
+nombre_rol VARCHAR(50) NOT NULL, descripcion_rol VARCHAR(50) NOT NULL);   
+
+CREATE TABLE personas(dni_persona INT(09) NOT NULL PRIMARY KEY, 
+nombre_persona VARCHAR(50) NOT NULL, apellido_paterno VARCHAR(50) NOT NULL, 
+apellido_materno VARCHAR(50) NOT NULL, telefono int(9) NOT NULL , 
+correo_electronico varchar(50) NOT NULL, direccion_persona varchar(50) NOT NULL);

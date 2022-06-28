@@ -15,7 +15,8 @@
               <div class="container">   
                 <div class="row">
                   <div class="col-md-6">
-                    <form action="/editStore" method="POST">
+                    <form action="/updateStore" method="POST">
+                      <input hidden id="id_pieza" name="id_pieza" value="<%= store.id_pieza %>">
                       <div class="mb-3">
                         <label for="dni_persona" class="form-label">Nombre pieza</label>
                         <input type="text" class="form-control" id="nombre_pieza" name="nombre_pieza" value="<%= store.nombre_pieza %>" tabindex="1" autofocus>              
@@ -28,7 +29,7 @@
                         <label for="pass" class="form-label">Stock</label>
                         <input type="text" class="form-control" id="stock_piezas" name="stock_piezas" value="<%= store.stock_piezas %>" tabindex="2">
                       </div>    
-                      <button type="submit" class="btn btn-primary" tabindex="4">Editar</button>
+                      <button onclick="editar();" type="submit" class="btn btn-primary" tabindex="4">Editar</button>
                       <a href="/store" class="btn btn-secondary">Cancelar</a>
                     </form>
                   </div>

@@ -27,6 +27,7 @@
                       <input type="password" class="form-control" id="cpass" name="cpass" tabindex="2">
                     </div>
                     <div class="mb-3">
+                      <label for="codigo_rol" class="form-label">Seleccionar Rol: </label>
                       <select id="codigo_rol" name="codigo_rol" class="form-select" tabindex="3">
                         <option></option>
                         <option value="1">Administrador</option>
@@ -38,7 +39,7 @@
                         <option value="7">Contabilidad</option>
                       </select>
                     </div>                   
-                    <button type="submit" class="btn btn-primary" tabindex="4">Crear</button>
+                    <button onclick="registrar();" type="submit" class="btn btn-primary" tabindex="4">Registrar Usuario</button>
                     <a href="/users" class="btn btn-secondary">Cancelar</a>
                   </form> 
                 </div>

@@ -153,12 +153,12 @@ exports.saveUser = (req, res) => {
              conexion.query(query, function(error, data) {
                     if(error) {
                     console.error(error)
-                    res.render('register', {
+                    res.render('users', {
                         alert: true,
                         alertMessage: 'Este usuario ya existe'
                     })
                     } else {   
-                    res.redirect('/')
+                    res.redirect('/users')
                  }
                 });
 
