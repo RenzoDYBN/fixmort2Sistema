@@ -8,7 +8,7 @@ const enterpriseController = require('../controllers/enterpriseController')
 const representanteController = require('../controllers/representanteController')
 const authController = require('../controllers/authController')
 const storeController = require('../controllers/storeController')
-// const cotizController = require('../controllers/cotizController')
+const cotizacionController = require('../controllers/cotizacionController')
 
 const { Router } = require('express')
 
@@ -133,6 +133,8 @@ router.get('/deletePerson/:dni_persona', (req, res) => {
 
 router.post('/savePerson', personController.savePerson)
 router.post('/updatePerson', personController.updatePerson)
+
+
 
 
 
@@ -402,7 +404,7 @@ router.get('/createCotizacion', authController.isAuthenticated, (req, res) => {
 //     })
 // });
 
-// router.post('/savePerson', personController.savePerson)
+router.post('/saveCotizacion', cotizacionController.saveCotizacion)
 // router.post('/updatePerson', personController.updatePerson)
 
 module.exports = router;

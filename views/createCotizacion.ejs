@@ -10,89 +10,19 @@
       <div class="row mb-2">
         <div class="col-md-12">
           <div class="container">
-            <form action="/saveEnterprise" method="POST">
-                    <fieldset class="formulario__campo empresa">
-                        <legend>Datos de la empresa</legend>
-                        <div class="formulario__div">
-                            <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" name="num_ruc" id="num_ruc" class="formulario__input" placeholder=" " maxlength="11" max="99999999999">
-                            <label for="ruc" class="formulario__label">RUC</label>
-                        </div>
-                        <div class="formulario__div">
-                            <input type="text" name="nombreemp" id="nombreemp" class="formulario__input" placeholder=" ">
-                            <label for="nombreemp" class="formulario__label">Nombre empresa</label>
-                        </div>
-                        <button type="button" class="formulario__boton-single slide b"><span>Buscar</span></button>
-                    </fieldset> 
-                    <fieldset class="formulario__campo datosMotor">
-                        <legend>Datos del motor</legend>
-                        <div class="formulario__div">
-                            <input type="text" name="placamot" id="placamot" class="formulario__input" placeholder=" ">
-                            <label for="placamot" class="formulario__label">Placa de motor</label>
-                        </div>
-                        <div class="formulario__div">
-                            <input type="text" name="desmot" id="desmot" class="formulario__input" placeholder=" ">
-                            <label for="desmot" class="formulario__label">Descripción de motor</label>
-                        </div>
-                    </fieldset>   
-
+            <form id="myForm" action="/saveCotizacion" method="POST">
                     <div class="form-group">
-                        <label>Multiple</label>
-                        <select class="select2" multiple="multiple" data-placeholder="Select a State"
-                                    style="width: 100%;">
+                        <label>Servicios</label>
+                        <select id="valores" class="select2" multiple="multiple" data-placeholder="Selecciona los servicios"
+                                    style="width: 40%;">
                               <% results.forEach ((cotiz) => { %>
                                 <option value="<%= cotiz.nombre_rol %>"><%= cotiz.nombre_rol %></option>        
                                 <% }) %>
                             </select>
                       </div>
-
-
-                    <fieldset class="formulario__campo">
-                        <legend>Condiciones</legend>
-                        <div class="formulario__div num_tie_entr">
-                            <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" name="num-tiemp-entrega" id="num-tiemp-entrega" class="formulario__input" placeholder=" " maxlength="2" max="999">
-                            <label for="num-tiemp-entrega" class="formulario__label">N°</label>
-                        </div>
-                        <div class="formulario__div">
-                            <select name="area" id="area" class="formulario__select-input">
-                                <option value=""></option>
-                                <option value="d">Días</option>
-                                <option value="m">Meses</option>
-                                <option value="a">Años</option>
-                            </select>
-                            <label for="area" class="formulario__select-label">Tiem. de entrega</label>
-                        </div>
-                        <div class="formulario__div num_for_pag">
-                            <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" name="num-forma-pago" id="num-forma-pago" class="formulario__input" placeholder=" " maxlength="2" max="999">
-                            <label for="num-forma-pago" class="formulario__label">N°</label>
-                        </div>
-                        <div class="formulario__div">
-                            <select name="area" id="area" class="formulario__select-input">
-                                <option value=""></option>
-                                <option value="d">Días</option>
-                                <option value="m">Meses</option>
-                                <option value="a">Años</option>
-                            </select>
-                            <label for="area" class="formulario__select-label">Forma de pago</label>
-                        </div>
-                        <div class="formulario__div num_gara">
-                            <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" name="num-gara" id="num-gara" class="formulario__input" placeholder=" " maxlength="2" max="999">
-                            <label for="num-gara" class="formulario__label">N°</label>
-                        </div>
-                        <div class="formulario__div">
-                            <select name="area" id="area" class="formulario__select-input">
-                                <option value=""></option>
-                                <option value="d">Días</option>
-                                <option value="m">Meses</option>
-                                <option value="a">Años</option>
-                            </select>
-                            <label for="area" class="formulario__select-label">Garantia</label>
-                        </div>
-                    </fieldset>
-                </div>
-                <p class="warnings" id="warnings"></p>
-                <div class="formulario__div-botones" style="text-align:center;">
-                    <input type="button" class="formulario__boton slide" value="Registrar" onclick="verInput()">
-                    <input type="submit" class="formulario__boton slide" value="Cancelar">
+                    <div class="formulario__div-botones" style="text-align:center;">
+                    <input type='hidden' id= 'hiddenField' name='id' value='' />
+                    <input type="submit" class="formulario__boton slide" value="Registrar" onclick="AddPostData();">
                 </div>
             </form>
         </div>
@@ -107,7 +37,31 @@
   
   <%- include("template/footer") %>
   <script>
-  $(function hola() {
+
+    function AddPostData() {
+        const payMethSelect = document.querySelector('#valores');
+    // console.log(payMethSelect);
+// init
+let opts = (JSON.parse( localStorage.getItem('valores') || '[]' ))
+console.log(opts);
+Array.from( payMethSelect.options).forEach(opt => 
+  {
+  opt.selected = opts.includes(opt.value)
+  });
+
+payMethSelect.onchange =_=>
+  {
+  let opts = Array.from(payMethSelect.selectedOptions).map(opt=>opt.value)
+  console.log(opts);
+  localStorage.setItem('valores', JSON.stringify(opts))
+  }
+  console.log(opts);
+        
+    }
+
+
+
+  $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
   })
