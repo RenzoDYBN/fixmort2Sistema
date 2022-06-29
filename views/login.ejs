@@ -15,24 +15,34 @@
     <link href="css/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    
-    <main class="form-signin text-center shadow-lg p-3 mb-5">
+    <div class="fondo">
+      <div class="imagen__fondo">
+        <img src="/img/FONDO_FIXMORT.jpg" alt="imagen de fondo" >
+      </div>
+      <div class="logo">
+        <img class="mb-4" src="img/logo-fixmort.png" alt="logo">
+      </div>
+      <main class="form-signin text-center p-3 mb-5">
       <form id="formLogin" action="/login" method="POST">
-        <h1>Bienvenidos a Fixmort S.A.C</h1>
-        <img class="mb-4" src="img/logotipo.png" alt="logo" width="50%" height="50%">
-        <div class="form-floating">
-          <input type="text" class="form-control" name="nombre_usuario" id="nombre_usuario" placeholder="Usuario" autofocus>
-          <label for="nombre_usuario">Usuario</label>
-        </div>
-        <div class="form-floating">
+        <h1>Inicia Sesión</h1>
+        
+        <p class="form-floating">
+          
+          <input type="text" class="form-control formulario__input" name="nombre_usuario" id="nombre_usuario" placeholder="Usuario" autofocus>
+          <label for="nombre_usuario" class="formulario__label">Usuario</label>
+        </p>
+        <p class="form-floating">
           <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
-          <label for="pass">Password</label>
-        </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>    
+          <label for="pass">Contraseña</label>
+        </p>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar Sesión</button>    
       </form>
       <br>
       <!-- <a href="/register" type="button" class="w-100 btn btn-lg btn-bd-primary">Sign in</a> -->
     </main>
+    </div>
+    
+    
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
     <% if(alert) { %>
@@ -41,13 +51,12 @@
           title: '<%= alertTitle %>',
           text:'<%= alertMessage %>',
           icon:'<%= alertIcon %>',
-          showConfirmButton: <%= showConfirmButton %>,
-          timer: <%= timer %>
+          showConfirmButton: '<%= showConfirmButton %>',
+          timer: '<%= timer %>'
         }).then(()=>{
           window.location = '/<%= ruta %>'
         })
       </script>
     <% } %>
-
   </body>
 </html>
