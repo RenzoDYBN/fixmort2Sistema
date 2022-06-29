@@ -90,7 +90,7 @@ exports.login = async (req, res)=>{
                     res.cookie('jwt', token, cookiesOptions);
                     res.render('login', {
                             alert: true,
-                            alertTitle: "Successful connection",
+                            alertTitle: " Conexión Exitosa",
                             alertMessage: "¡CORRECT LOGIN!",
                             alertIcon:'success',
                             showConfirmButton: false,
