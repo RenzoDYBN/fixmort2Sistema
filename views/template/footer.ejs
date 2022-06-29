@@ -64,7 +64,7 @@
       $('#tableUsers').DataTable();
   }); 
 
-  function confirmation(usuario){
+  function confirmation_usuario(usuario){
     Swal.fire({
       title: '¿Quieres eliminar el usuario ' + usuario + ' ?',
       icon: 'warning',
@@ -79,7 +79,7 @@
     })
   }
 
-  function confirmation(id_empresas){
+  function confirmation_empresa(id_empresas){
     Swal.fire({
       title: '¿Quieres eliminar la empresa ' + id_empresas + ' ?',
       icon: 'warning',
@@ -94,7 +94,7 @@
     })
   }
 
-  function confirmation(id_pieza){
+  function confirmation_store(id_pieza){
     Swal.fire({
       title: '¿Quieres eliminar la pieza ' + id_pieza + ' ?',
       icon: 'warning',
@@ -109,7 +109,8 @@
     })
   }
 
-  function confirmation(dni_persona){
+
+  function confirmation_persons(dni_persona){
     Swal.fire({
       title: '¿Quieres eliminar la persona ' + dni_persona + ' ?',
       icon: 'warning',
