@@ -64,7 +64,9 @@ router.get('/editUser/:usuario', authController.isAuthenticated, (req, res) => {
 //path to delete a selected record
 router.get('/deleteUser/:usuario', (req, res) => {
     const usuario = req.params.usuario
+    console.log("ingrese a eliminar usuario:" + usuario);
     conexion.query('DELETE FROM usuarios WHERE usuario= ?', [usuario], (error, results) => {
+        console.log("ingrese a eliminar usuario:" + results)
         if(error){
             throw error;
         } else {
@@ -122,6 +124,7 @@ router.get('/editPerson/:dni_persona', authController.isAuthenticated, (req, res
 //path to delete a selected person record
 router.get('/deletePerson/:dni_persona', (req, res) => {
     const dni_persona = req.params.dni_persona
+    console.log("ingrese aqui a personas")
     conexion.query('DELETE FROM personas WHERE dni_persona= ?', [dni_persona], (error, results) => {
         if(error){
             throw error;
