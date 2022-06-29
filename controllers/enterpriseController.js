@@ -39,12 +39,12 @@ exports.saveEnterprise = (req, res) => {
 exports.updateEnterprise =  (req, res) => {
     // const id_empresas = req.body.id_empresas
     const id_ruc = req.body.id_ruc 
-    // const id_representante = req.body.id_representante
-    // const nombre_empresa = req.body.nombre_empresa
-    // const numero_contacto = req.body.numero_contacto
+    const id_representante = req.body.id_representante
+    const nombre_empresa = req.body.nombre_empresa
+    const numero_contacto = req.body.numero_contacto
 
 
-    conexion.query('UPDATE empresas SET ? WHERE id_ruc != ?', [req.body, id_ruc ], (error, results) => {
+    conexion.query('UPDATE empresas SET ? WHERE id_ruc = ?', [{id_representante:id_representante,nombre_empresa:nombre_empresa,numero_contacto:numero_contacto}, id_ruc ], (error, results) => {
         if(error) {
             console.error(error)
         } else {
