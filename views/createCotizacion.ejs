@@ -10,7 +10,7 @@
       <div class="row mb-2">
         <div class="col-md-12">
           <div class="container">
-            <form id="myForm" action="/saveCotizacion" method="POST">
+            <form onsubmit="save_data()" action="/saveCotizacion" method="POST">
                     <div class="form-group">
                         <label>Servicios</label>
                         <select id="valores" class="select2" multiple="multiple" data-placeholder="Selecciona los servicios"
@@ -22,7 +22,7 @@
                       </div>
                     <div class="formulario__div-botones" style="text-align:center;">
                     <input type='hidden' id= 'hiddenField' name='id' value='' />
-                    <input type="submit" class="formulario__boton slide" value="Registrar" onclick="AddPostData();">
+                    <input type="submit" class="formulario__boton slide" value="Registrar" onclick="almacen();">
                 </div>
             </form>
         </div>
@@ -38,7 +38,6 @@
   <%- include("template/footer") %>
   <script>
 
-    function AddPostData() {
         const payMethSelect = document.querySelector('#valores');
     // console.log(payMethSelect);
 // init
@@ -56,8 +55,43 @@ payMethSelect.onchange =_=>
   localStorage.setItem('valores', JSON.stringify(opts))
   }
   console.log(opts);
-        
-    }
+  console.log("enviado");
+ 
+// function almacen() {
+//     console.log("gaa");
+//     const items = { ...localStorage };
+
+//   console.log(items);
+// }
+  
+
+function save_data() {
+
+  var storedValue = localStorage.getItem("valores");
+    console.log("llegue aqui a stored");
+    console.log(storedValue);
+}
+
+
+function ClientSide()
+{
+    var info = [];
+    info[0] = 'hi';
+    info[1] = 'hello';
+
+    var json = JSON.stringify(info); //pass this
+
+    $.ajax({
+        type: 'post',
+        url: '/save',
+        data: json,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (html) {
+            // use data
+        }
+    })
+}
 
 
 

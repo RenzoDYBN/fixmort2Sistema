@@ -13,7 +13,8 @@ exports.saveCotizacion = (req, res) => {
     // const valoress = req.opts;
     // var data = JSON.parse(localStorage.getItem("key name"));
     // const opts =  req.body.valores;
-    // console.log(opts);
+    // console.log(data);   
+    console.log(req.storedValue);
 
 
     // conexion.query('SELECT * FROM representante WHERE id_representante = ?', [id_representante], (err, results, fields) => {
