@@ -38,7 +38,7 @@
                       <th><%= representante.telefono_representante %></th>
                       <td>
                         <a href="/editRepresentante/<%= representante.id_representante %>" class="editar btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
-                        <a onclick="confirmation(<%= representante.id_representante %>);" class="eliminar btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
+                        <a onclick="confirmation_representante(<%= representante.id_representante %>);" class="eliminar btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
                       </td>
                     </tr>                              
                   <% }) %>

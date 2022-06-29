@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app",
-    "start": "node app"
+    "start": "pm2 start app.js",
+    "stop": "pm2 stop app.js"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +21,8 @@
     "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
-    "nodemailer": "^6.7.5"
+    "nodemailer": "^6.7.5",
+    "pm2": "^5.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.18"
