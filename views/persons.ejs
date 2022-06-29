@@ -12,7 +12,7 @@
           <div class="col-md-12">            
             <div class="container tabla-contenedor">
               <a href="/createPerson" class="btn btn-primary mb-2"> <i class="fa-regular fa-square-plus"></i></a>
-              <table id="example1" class="table table-bordered table-striped text-center mt-4" style="width:107%">
+              <table id="example1" class="table table-bordered table-striped text-center mt-4">
                 <thead>
                   <tr class="bg-primary text-white">
                     <th scope="col">DNI</th>
@@ -38,8 +38,8 @@
                       <th><%= person.direccion_persona %></th>
                       
                       <td>
-                        <a href="/editPerson/<%= person.dni_persona %>" class="btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
-                        <a onclick="confirmation(<%= person.dni_persona %>);" class="btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
+                        <a href="/editPerson/<%= person.dni_persona %>" class="editar btn btn-info"> <i class="fa-regular fa-pen-to-square"></i></a>
+                        <a onclick="confirmation(<%= person.dni_persona %>);" class="eliminar btn btn-danger"> <i class="fa-regular fa-trash-can"></i></a>              
                       </td>
                     </tr>                              
                   <% }) %>
