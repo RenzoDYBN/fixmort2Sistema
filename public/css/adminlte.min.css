@@ -225,6 +225,7 @@
     .container{
         background: #fff;
         padding: 1.5rem 2rem;
+        margin: 0 auto;
     }
 
     div#example1_length,
