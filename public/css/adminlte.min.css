@@ -1991,14 +1991,14 @@
   color:#fff;
   background-color:#457A17;
   border-color:#457A17;
-  box-shadow:none,0 0 0 0 rgba(140, 254, 134,.35)}.btn-primary.disabled,.btn-primary:disabled{
+  box-shadow:0 0 0 0 rgba(140, 254, 134,.35)}.btn-primary.disabled,.btn-primary:disabled{
   color:#fff;
   background-color:#457A17;
   border-color:#457A17}.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle{
   color:#fff;
-  background-color:#0062cc;
-  border-color:#005cbf}.btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{
-  box-shadow:0 0 0 0 rgba(38,143,255,.5)}.btn-secondary{
+  background-color:#457A17;
+  border-color:#457A17}.btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{
+  box-shadow:0 0 0 0 rgba(140, 254, 134,.35)}.btn-secondary{
   color:#fff;
   background-color:#6c757d;
   border-color:#6c757d;
