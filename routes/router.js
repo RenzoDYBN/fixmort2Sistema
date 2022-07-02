@@ -19,6 +19,51 @@ const { json } = require('express');
 //Invoke the database connection
 const conexion = require('../database/db')
 
+
+//router for views
+// router.get('/', authController.isAuthenticated, (req, res) => {
+//     res.render('index', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Control Dashboard"})
+// })
+
+// router.get(["/", "/login"], (req, res) => {
+//     res.render('login');
+// })
+
+router.get('/logout', authController.logout)
+
+router.get(["/", "/login"], (req, res) => {
+    res.render('login', { alert:false })
+})
+
+router.get("/index", authController.isAuthenticated, (req, res) => {
+    // res.send("<h1>Hello Renzo</h1>")
+    // console.log(req.name);
+    conexion.query('SELECT * FROM usuarios', (error, results) => {
+        if(error){
+            throw error;
+        } else {
+            // res.send(results);
+            if (row.codigo_rol >= 0) { 
+                // console.log(results);
+                res.render('index', { results:results, nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Control Dashboard"});
+            } else {
+                res.render('login', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+            }
+        }
+    })
+});
+
+// router.get('/login', (req, res) => {
+//     res.render('login', { alert:false })
+// })
+
+// router.get('/register', (req, res) => {
+//     res.render('register', { alert:false })
+// })
+
+// router.post('/register', authController.register)
+router.post('/login', authController.login)
+
 //path to retrieve all users
 router.get('/users', authController.isAuthenticated, (req, res) => {
     // res.send('hola mundo')    
@@ -30,7 +75,7 @@ router.get('/users', authController.isAuthenticated, (req, res) => {
             if (row.codigo_rol == 1) { 
                 res.render('users', { results: results,nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "List users" })
             } else {
-                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+                res.render('index', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Control Dashboard"})
             }
         }
     })
@@ -90,7 +135,7 @@ router.get('/persons', authController.isAuthenticated, (req, res) => {
             if (row.codigo_rol=="1") { 
                 res.render('persons', { results: results, nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "List persons" })
             } else {
-                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+                res.render('index', {nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Control Dashboard"})
             }
         }
     })
@@ -152,7 +197,7 @@ router.get('/representantes', authController.isAuthenticated, (req, res) => {
             if (row.codigo_rol=="1") { 
                 res.render('representantes', { results: results,nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "List Representante" })
             } else {
-                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+                res.render('index', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Control Dashboard"})
             }
         }
     })
@@ -211,7 +256,7 @@ router.get('/enterprises', authController.isAuthenticated, (req, res) => {
             if (row.codigo_rol=="1") { 
                 res.render('enterprises', { results: results, nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "List Empresas" })
             } else {
-                res.render('index', { userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+                res.render('index', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Control Dashboard"})
             }
         }
     })
@@ -259,25 +304,6 @@ router.post('/saveEnterprise', enterpriseController.saveEnterprise)
 router.post('/updateEnterprise', enterpriseController.updateEnterprise)
 
 
-
-//router for views
-router.get('/', authController.isAuthenticated, (req, res) => {
-    res.render('index', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Control Dashboard"})
-})
-
-router.get('/logout', authController.logout)
-
-router.get('/login', (req, res) => {
-    res.render('login', { alert:false })
-})
-
-// router.get('/register', (req, res) => {
-//     res.render('register', { alert:false })
-// })
-
-// router.post('/register', authController.register)
-router.post('/login', authController.login)
-
 router.post('/upload/:usuario', (req, res) => {
     const usuario = req.params.usuario
     const image = req.file.filename
@@ -302,7 +328,7 @@ router.get('/store', authController.isAuthenticated, (req, res) => {
             if (row.codigo_rol == 1) { 
                 res.render('store', { results: results, nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario,titleWeb: "List store" })
             } else {
-                res.render('index', { userName: row.name, image: row.image, titleWeb: "Almacen"})
+                res.render('index', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario, titleWeb: "Control Dashboard"})
             }
         }
     })
@@ -370,7 +396,7 @@ router.get('/createCotizacion', authController.isAuthenticated, (req, res) => {
 })
 
 
-//path to create a person record
+//path to create a cotiz record
 // router.get('/createCotizacion', authController.isAuthenticated, (req, res) => {
 //     if (row.codigo_rol=="1") {        
 //         res.render('createCotizacion', { nombre_usuario: row.nombre_usuario, estado_usuario: row.estado_usuario,titleWeb: "Create person"})
@@ -379,7 +405,7 @@ router.get('/createCotizacion', authController.isAuthenticated, (req, res) => {
 //     }
 // })
 
-//path to edit a selected person record
+//path to edit a selected cotiz record
 // router.get('/editPerson/:dni_persona', authController.isAuthenticated, (req, res) => {
 //     const dni_persona = req.params.dni_persona;
 //     conexion.query('SELECT * FROM personas WHERE dni_persona= ?', [dni_persona], (error, results) => {
@@ -395,7 +421,7 @@ router.get('/createCotizacion', authController.isAuthenticated, (req, res) => {
 //     })
 // })
 
-//path to delete a selected person record
+//path to delete a selected cotiz record
 // router.get('/deletePerson/:dni_persona', (req, res) => {
 //     const dni_persona = req.params.dni_persona
 //     conexion.query('DELETE FROM personas WHERE dni_persona= ?', [dni_persona], (error, results) => {

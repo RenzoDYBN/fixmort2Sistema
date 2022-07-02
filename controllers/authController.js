@@ -95,8 +95,9 @@ exports.login = async (req, res)=>{
                             alertIcon:'success',
                             showConfirmButton: false,
                             timer: 800,
-                            ruta: ''
+                            ruta: 'index'
                     })
+                    // res.status(200).redirect("/index");
                 }
             })
         }
