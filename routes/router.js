@@ -433,6 +433,16 @@ router.get('/createCotizacion', authController.isAuthenticated, (req, res) => {
 //     })
 // });
 
+// router.post('/saveCotizacion', function(req, res){
+//     console.log(req.body);
+//     db.run(
+//         'INSERT into days VALUES  ($harvestDays)',
+//         {
+//     $harvestDays: req.body.harvestDays
+//         } 
+//         );
+//     });
+
 router.post('/saveCotizacion', cotizacionController.saveCotizacion)
 // router.post('/updatePerson', personController.updatePerson)
 

@@ -10,7 +10,8 @@
       <div class="row mb-2">
         <div class="col-md-12">
           <div class="container">
-            <form onsubmit="save_data()" action="/saveCotizacion" method="POST">
+            <form id="form" action="" method="POST">
+              <!-- onsubmit="save_data()" -->
                     <div class="form-group">
                         <label>Servicios</label>
                         <select id="valores" class="select2" multiple="multiple" data-placeholder="Selecciona los servicios"
@@ -22,7 +23,8 @@
                       </div>
                     <div class="formulario__div-botones" style="text-align:center;">
                     <input type='hidden' id= 'hiddenField' name='id' value='' />
-                    <input type="submit" class="formulario__boton slide" value="Registrar" onclick="almacen();">
+                    <input id="btnSubmit" type="submit" class="formulario__boton slide" value="Registrar" >
+                    <!-- onclick="almacen();" -->
                 </div>
             </form>
         </div>
@@ -38,32 +40,45 @@
   <%- include("template/footer") %>
   <script>
 
-        const payMethSelect = document.querySelector('#valores');
+        // const payMethSelect = document.querySelector('#valores');
     // console.log(payMethSelect);
 // init
-let opts = (JSON.parse( localStorage.getItem('valores') || '[]' ))
-console.log(opts);
-Array.from( payMethSelect.options).forEach(opt => 
-  {
-  opt.selected = opts.includes(opt.value)
-  });
+// let opts = (JSON.parse( localStorage.getItem('valores') || '[]' ))
+// console.log(opts);
+// Array.from( payMethSelect.options).forEach(opt => 
+//   {
+//   opt.selected = opts.includes(opt.value)
+//   });
 
-payMethSelect.onchange =_=>
-  {
-  let opts = Array.from(payMethSelect.selectedOptions).map(opt=>opt.value)
-  console.log(opts);
-  localStorage.setItem('valores', JSON.stringify(opts))
-  }
-  console.log(opts);
-  console.log("enviado");
+// payMethSelect.onchange =_=>
+//   {
+//   let opts = Array.from(payMethSelect.selectedOptions).map(opt=>opt.value)
+//   console.log(opts);
+//   localStorage.setItem('valores', JSON.stringify(opts))
+//   }
+//   console.log(opts);
+//   console.log("enviado");
  
 // function almacen() {
-//     console.log("gaa");
 //     const items = { ...localStorage };
 
 //   console.log(items);
 // }
   
+
+$(document).ready(function() {
+$('#btnSubmit').click(function() {
+            $.ajax({
+                url: 'http://localhost:3000/saveCotizacion',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                  valores: $('#valores').val()
+                }
+            })
+
+});
+});
 
 function save_data() {
 
@@ -73,31 +88,27 @@ function save_data() {
 }
 
 
-function ClientSide()
-{
-    var info = [];
-    info[0] = 'hi';
-    info[1] = 'hello';
+// function ClientSide()
+// {
+//     var info = [];
+//     info[0] = 'hi';
+//     info[1] = 'hello';
 
-    var json = JSON.stringify(info); //pass this
+//     var json = JSON.stringify(info); //pass this
 
-    $.ajax({
-        type: 'post',
-        url: '/save',
-        data: json,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (html) {
-            // use data
-        }
-    })
-}
+//     $.ajax({
+//         type: 'post',
+//         url: '/save',
+//         data: json,
+//         contentType: "application/json; charset=utf-8",
+//         dataType: "json",
+//         success: function (html) {
+//             // use data
+//         }
+//     })
+// }
 
 
 
-  $(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-  })
   </script>
 
